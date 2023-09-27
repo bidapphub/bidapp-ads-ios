@@ -77,6 +77,37 @@
 
 + (BOOL)sdkAvailableWithCompatibleVersion
 {
+    if (![Chartboost respondsToSelector:@selector(getSDKVersion)])
+    {
+        return NO;
+    }
+    
+    int componentIndex = 0;
+    for (NSString* v in [[Chartboost getSDKVersion]componentsSeparatedByString:@"."])
+    {
+        int versionComponent = v.intValue;
+        if (componentIndex == 0)
+        {
+            if (versionComponent != 9)
+            {
+                return NO;
+            }
+        }
+        else if (componentIndex == 1)
+        {
+            if (versionComponent != 4)
+            {
+                return NO;
+            }
+        }
+        else
+        {
+            break;
+        }
+        
+        ++componentIndex;
+    }
+
     return YES;
 }
 
