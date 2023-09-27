@@ -21,15 +21,15 @@
 @implementation BIDApplovinMaxSDK
 {
 	id<BIDNetworkSDK> __weak adapter;
-	NSString* accountId;
+	NSString* sdkKey;
 }
 
--(id)initWithNetworkSDK:(id<BIDNetworkSDK>)adapter_ accountId:(NSString*)accountId_
+-(id)initWithNetworkSDK:(id<BIDNetworkSDK>)adapter_ SDKKey:(NSString*)sdkKey_
 {
 	if (self == [super init])
 	{
 		adapter = adapter_;
-		accountId = accountId_;
+		sdkKey = sdkKey_;
 	}
 	
 	return self;
@@ -42,7 +42,7 @@
 
 - (ALSdk *)alSDK
 {
-	return [ALSdk sharedWithKey:accountId];
+	return [ALSdk sharedWithKey:sdkKey];
 }
 
 - (void)initializeSDK

@@ -76,8 +76,6 @@
 			eventsArray = @[eventsArray];
 		}
 		
-		//NSLog(@"xxx_userContentController: %@ %@", message.name, message.body);
-		
 		if ([eventsArray isKindOfClass:[NSArray class]])
 		{
 			for (NSArray* event in eventsArray)
@@ -110,9 +108,6 @@
 {
 	id<BIDNetworkFullscreen> __weak networkFullscreen;
 	
-	//NSString* adTag;
-	BOOL isRewarded;
-	
 	BOOL unityAdControllerOpened;
 	BOOL unityAdControllerClosed;
 	BOOL useCloseEventWorkaround;
@@ -129,9 +124,9 @@
 @implementation BIDUnityFullscreen
 
 + (NSString *)logPrefix { return @"UnityFull"; }
-- (NSString *)logPrefix { return [NSString stringWithFormat:@"%@ UnityFull",isRewarded ? @"rewarded" : @"interstitial"]; }
+- (NSString *)logPrefix { return [NSString stringWithFormat:@"%@ UnityFull",_rewarded ? @"rewarded" : @"interstitial"]; }
 
--(id)initWithNetworkFullscreen:(id<BIDNetworkFullscreen>)ntFull SDK:(id)networkSDK adTag:(NSString *)tag isRewarded:(BOOL)isRewarded_
+-(id)initWithNetworkFullscreen:(id<BIDNetworkFullscreen>)ntFull SDK:(id)networkSDK adTag:(NSString *)tag isRewarded:(BOOL)isRewarded
 {
 	if (self = [super init])
 	{
@@ -208,8 +203,8 @@
 -(BOOL)showWithViewController:(UIViewController *)vc error:(NSError *__autoreleasing  _Nullable *)error
 {
 	BIDLog(self,@"_showWithViewController: %@ placementId: %@", vc, _placementId);
-	
-	//Для тестов на layer1Playground. Для других ситуаций это не нужно - все адаптеры одноразовые
+
+    //For testing at layer1Playgrouns. For other situation it is not needed because all adapters are used only once
 	unityAdControllerOpened = NO;
 	unityAdControllerClosed = NO;
 	useCloseEventWorkaround = NO;
@@ -275,7 +270,8 @@
 {
 	BIDLog(self, @"unityAdsShowComplete: %@ withFinishState: %ld", placementId, state);
 	
-	if (state == kUnityShowCompletionStateCompleted)
+	if (state == kUnityShowCompletionStateCompleted &&
+        _rewarded)
 	{
 		[networkFullscreen onReward];
 	}

@@ -42,7 +42,7 @@
 		adTag = adTag_;
 		isRewarded = isRewarded_;
 		
-		//при sdk == nil у нас апплавин бросает эксепшен
+		//if sdk == nil, Applovin will throw exception
 		_interstitialAd = [[MAInterstitialAd alloc] initWithAdUnitIdentifier:adTag sdk:networkSDK];
 		_interstitialAd.delegate = self;
 		_sdk = networkSDK;

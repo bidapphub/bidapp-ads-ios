@@ -16,7 +16,7 @@
 #import "BIDNetworkSettings.h"
 #import "NSError+Categories.h"
 
-//Если отображать баннер во время кэширования - он крэшит прил
+//If you display banner during caching - the app will crash
 //#define DISPLAY_DURING_CACHING
 
 @interface BIDLiftoffBanner ()<VungleBannerDelegate>

@@ -54,9 +54,9 @@ static NSMutableDictionary<NSString*,NSMutableArray<dispatch_block_t>*>* startSD
 	if (waiters.count == 1)
 	{
 		[(ALSdk*)sdk initializeSdkWithCompletionHandler:^(ALSdkConfiguration *configuration) {
-			BIDLog(self,@"Vungle SDK initialized");
+			BIDLog(self,@"Applovin SDK initialized");
 
-			//на всякий случай - а вдруг апплавин решит как Vungle в неглавном потоке дернуть completion
+            //In case we get callback from background thread (not sure it is possible or not)
 			dispatch_async(dispatch_get_main_queue(), ^(){
 				
 				for (dispatch_block_t t in waiters)

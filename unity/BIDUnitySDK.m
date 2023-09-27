@@ -27,15 +27,15 @@
 @implementation BIDUnitySDK
 {
 	id<BIDNetworkSDK> __weak networkSDK;
-	NSString* accountId;
+	NSString* sdkKey;
 }
 
--(id)initWithNetworkSDK:(id<BIDNetworkSDK>)ntSDK accountId:(NSString*)accId
+-(id)initWithNetworkSDK:(id<BIDNetworkSDK>)ntSDK SDKKey:(NSString*)sdkK
 {
 	if (self == [super init])
 	{
         networkSDK = ntSDK;
-		accountId = accId;
+		sdkKey = sdkK;
 	}
 	
 	return self;
@@ -47,7 +47,7 @@
 		!networkSDK.initializationInProgress)
 	{
 		[networkSDK onInitializationStart];
-		[UnityAds initialize:accountId testMode:testMode initializationDelegate:self];
+		[UnityAds initialize:sdkKey testMode:testMode initializationDelegate:self];
 	}
 };
 

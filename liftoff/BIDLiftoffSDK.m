@@ -19,17 +19,17 @@
 @implementation BIDLiftoffSDK
 {
 	id<BIDNetworkSDK> __weak networkSDK;
-	NSString* accountId;
+	NSString* sdkKey;
 	
 	BOOL testMode;
 }
 
--(id)initWithNetworkSDK:(id<BIDNetworkSDK>)ntSDK accountId:(NSString*)accId
+-(id)initWithNetworkSDK:(id<BIDNetworkSDK>)ntSDK SDKKey:(NSString*)sdkK
 {
 	if (self == [super init])
 	{
 		networkSDK = ntSDK;
-		accountId = accId;
+		sdkKey = sdkK;
 	}
 	
 	return self;
@@ -67,7 +67,6 @@
 	return NO;
 }
 
-// super override
 - (void)initializeSDK
 {
 	if (!self.isInitialized &&
@@ -76,9 +75,9 @@
 		[networkSDK onInitializationStart];
 		
 		__weak typeof(self) weakSelf = self;
-		[VungleAds initWithAppId:accountId completion:^(NSError * _Nullable error) {
-			
-			//Вангл дергает completion из неглавного потока
+		[VungleAds initWithAppId:sdkKey completion:^(NSError * _Nullable error) {
+
+            //Redirecting from a background to the main thread
 			dispatch_async(dispatch_get_main_queue(), ^(){
 				
 				if (error)
