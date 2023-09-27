@@ -94,23 +94,22 @@ static NSNumber* currentConsent_GDPR = nil;
     return currentConsent_GDPR;
 }
 
-static NSNumber* currentConsent_CCPA = nil;
-+ (NSNumber *)CCPA
-{
-    return currentConsent_CCPA;
-}
-
-static NSNumber* currentConsent_COPPA = nil;
-+ (NSNumber *)COPPA
-{
-    return currentConsent_COPPA;
-}
-
 - (void)setConsent:(id<BIDConsent>)consent
 {
     currentConsent_GDPR = consent.GDPR;
-    currentConsent_CCPA = consent.CCPA;
-    currentConsent_COPPA = consent.COPPA;
+
+    if (consent.CCPA)
+    {
+        if (consent.CCPA.boolValue)
+        {
+            // Restrict data processing - https://developers.google.com/admob/ios/ccpa
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"gad_rdp"];
+        }
+        else
+        {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey: @"gad_rdp"];
+        }
+    }
 }
 
 @end

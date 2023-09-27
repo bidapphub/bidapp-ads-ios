@@ -13,8 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BIDAdmobSDK : NSObject<BIDNetworkAdapter>
 
 @property(nonatomic,readonly,class) NSNumber* GDPR;
-@property(nonatomic,readonly,class) NSNumber* CCPA;
-@property(nonatomic,readonly,class) NSNumber* COPPA;
 
 @end
 

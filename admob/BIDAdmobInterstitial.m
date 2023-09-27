@@ -51,11 +51,10 @@
     
     GADRequest* request = [GADRequest request];
     
-    if (nil != BIDAdmobSDK.GDPR ||
-        nil != BIDAdmobSDK.CCPA)
+    if (BIDAdmobSDK.GDPR)
     {
         GADExtras *extras = [[GADExtras alloc] init];
-        extras.additionalParameters = @{ @"npa": @( !(BIDAdmobSDK.GDPR.boolValue || BIDAdmobSDK.GDPR.boolValue) ) };
+        extras.additionalParameters = @{ @"npa": @( !BIDAdmobSDK.GDPR.boolValue ) };
         [request registerAdNetworkExtras:extras];
     }
     
