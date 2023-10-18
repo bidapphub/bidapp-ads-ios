@@ -1,0 +1,456 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 53;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7424311C2A17F41900C324B1 /* BidappApplovinAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7424311B2A17F41900C324B1 /* BidappApplovinAdapter.framework */; };
+		7424314E2A17F50600C324B1 /* BidappApplovinMaxAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7424314D2A17F50600C324B1 /* BidappApplovinMaxAdapter.framework */; };
+		742431502A17F50600C324B1 /* BidappLiftoffAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7424314F2A17F50600C324B1 /* BidappLiftoffAdapter.framework */; };
+		742431522A17F50600C324B1 /* BidappUnityAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 742431512A17F50600C324B1 /* BidappUnityAdapter.framework */; };
+		74BC8BB72AE04B1D00DF2EAF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BC8BAA2AE04B1C00DF2EAF /* ViewController.m */; };
+		74BC8BB82AE04B1D00DF2EAF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BC8BAB2AE04B1C00DF2EAF /* AppDelegate.m */; };
+		74BC8BB92AE04B1D00DF2EAF /* BannersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BC8BAC2AE04B1C00DF2EAF /* BannersTableViewController.m */; };
+		74BC8BBA2AE04B1D00DF2EAF /* BannerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BC8BAD2AE04B1C00DF2EAF /* BannerDelegate.m */; };
+		74BC8BBB2AE04B1D00DF2EAF /* FullscreenLoadDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BC8BAE2AE04B1C00DF2EAF /* FullscreenLoadDelegate.m */; };
+		74BC8BBC2AE04B1D00DF2EAF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BC8BAF2AE04B1C00DF2EAF /* main.m */; };
+		74BC8BBD2AE04B1D00DF2EAF /* FullscreenShowDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BC8BB12AE04B1C00DF2EAF /* FullscreenShowDelegate.m */; };
+		74BC8BC02AE04CBA00DF2EAF /* tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BC8BBF2AE04CBA00DF2EAF /* tools.m */; };
+		FF29AA4229CB39BB007BFF54 /* bidapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF29AA4129CB39BB007BFF54 /* bidapp.framework */; };
+		FF567B8629A78F9B001FE7F8 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF567B8429A78F9B001FE7F8 /* AppTrackingTransparency.framework */; };
+		FF5E148F29885110004FA12E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF5E148D29885110004FA12E /* Main.storyboard */; };
+		FF5E149129885114004FA12E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF5E149029885114004FA12E /* Assets.xcassets */; };
+		FF5E149429885114004FA12E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF5E149229885114004FA12E /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		741920992A44F0D4003044B0 /* BidappAdKernelAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidappAdKernelAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7419209B2A44F0E4003044B0 /* PrebidMobile.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = PrebidMobile.xcframework; path = ../bidapp/PrebidMobile.xcframework; sourceTree = "<group>"; };
+		7424311B2A17F41900C324B1 /* BidappApplovinAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidappApplovinAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7424314D2A17F50600C324B1 /* BidappApplovinMaxAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidappApplovinMaxAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7424314F2A17F50600C324B1 /* BidappLiftoffAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidappLiftoffAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		742431512A17F50600C324B1 /* BidappUnityAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidappUnityAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7477C1C82AC3241E00AE909D /* BidappAdmobAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidappAdmobAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		74BC8BAA2AE04B1C00DF2EAF /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		74BC8BAB2AE04B1C00DF2EAF /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		74BC8BAC2AE04B1C00DF2EAF /* BannersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannersTableViewController.m; sourceTree = "<group>"; };
+		74BC8BAD2AE04B1C00DF2EAF /* BannerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerDelegate.m; sourceTree = "<group>"; };
+		74BC8BAE2AE04B1C00DF2EAF /* FullscreenLoadDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullscreenLoadDelegate.m; sourceTree = "<group>"; };
+		74BC8BAF2AE04B1C00DF2EAF /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		74BC8BB02AE04B1C00DF2EAF /* FullscreenLoadDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullscreenLoadDelegate.h; sourceTree = "<group>"; };
+		74BC8BB12AE04B1C00DF2EAF /* FullscreenShowDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullscreenShowDelegate.m; sourceTree = "<group>"; };
+		74BC8BB22AE04B1C00DF2EAF /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		74BC8BB32AE04B1C00DF2EAF /* FullscreenShowDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullscreenShowDelegate.h; sourceTree = "<group>"; };
+		74BC8BB42AE04B1D00DF2EAF /* BannersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannersTableViewController.h; sourceTree = "<group>"; };
+		74BC8BB52AE04B1D00DF2EAF /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		74BC8BB62AE04B1D00DF2EAF /* BannerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerDelegate.h; sourceTree = "<group>"; };
+		74BC8BBE2AE04CBA00DF2EAF /* tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tools.h; sourceTree = "<group>"; };
+		74BC8BBF2AE04CBA00DF2EAF /* tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tools.m; sourceTree = "<group>"; };
+		74EBD7ED2ABDB94D009BE472 /* BidappChartboostAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidappChartboostAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF29AA4129CB39BB007BFF54 /* bidapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = bidapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF567B8429A78F9B001FE7F8 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
+		FF5E148129885110004FA12E /* bidappPlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bidappPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF5E148E29885110004FA12E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FF5E149029885114004FA12E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FF5E149329885114004FA12E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FF5E149529885114004FA12E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FF5E147E29885110004FA12E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7424314E2A17F50600C324B1 /* BidappApplovinMaxAdapter.framework in Frameworks */,
+				742431502A17F50600C324B1 /* BidappLiftoffAdapter.framework in Frameworks */,
+				742431522A17F50600C324B1 /* BidappUnityAdapter.framework in Frameworks */,
+				7424311C2A17F41900C324B1 /* BidappApplovinAdapter.framework in Frameworks */,
+				FF567B8629A78F9B001FE7F8 /* AppTrackingTransparency.framework in Frameworks */,
+				FF29AA4229CB39BB007BFF54 /* bidapp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		47D3178DBB2A482A97B78DEC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		FF5E147829885110004FA12E = {
+			isa = PBXGroup;
+			children = (
+				FF5E148329885110004FA12E /* bidappPlayground */,
+				FF5E148229885110004FA12E /* Products */,
+				FFFD64FE29A789AB00E735E7 /* Frameworks */,
+				47D3178DBB2A482A97B78DEC /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		FF5E148229885110004FA12E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FF5E148129885110004FA12E /* bidappPlayground.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FF5E148329885110004FA12E /* bidappPlayground */ = {
+			isa = PBXGroup;
+			children = (
+				74BC8BB52AE04B1D00DF2EAF /* AppDelegate.h */,
+				74BC8BAB2AE04B1C00DF2EAF /* AppDelegate.m */,
+				74BC8BB22AE04B1C00DF2EAF /* ViewController.h */,
+				74BC8BAA2AE04B1C00DF2EAF /* ViewController.m */,
+				74BC8BB02AE04B1C00DF2EAF /* FullscreenLoadDelegate.h */,
+				74BC8BAE2AE04B1C00DF2EAF /* FullscreenLoadDelegate.m */,
+				74BC8BB32AE04B1C00DF2EAF /* FullscreenShowDelegate.h */,
+				74BC8BB12AE04B1C00DF2EAF /* FullscreenShowDelegate.m */,
+				74BC8BB62AE04B1D00DF2EAF /* BannerDelegate.h */,
+				74BC8BAD2AE04B1C00DF2EAF /* BannerDelegate.m */,
+				74BC8BB42AE04B1D00DF2EAF /* BannersTableViewController.h */,
+				74BC8BAC2AE04B1C00DF2EAF /* BannersTableViewController.m */,
+				74BC8BBE2AE04CBA00DF2EAF /* tools.h */,
+				74BC8BBF2AE04CBA00DF2EAF /* tools.m */,
+				74BC8BAF2AE04B1C00DF2EAF /* main.m */,
+				FF5E148D29885110004FA12E /* Main.storyboard */,
+				FF5E149029885114004FA12E /* Assets.xcassets */,
+				FF5E149229885114004FA12E /* LaunchScreen.storyboard */,
+				FF5E149529885114004FA12E /* Info.plist */,
+			);
+			path = bidappPlayground;
+			sourceTree = "<group>";
+		};
+		FFFD64FE29A789AB00E735E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7477C1C82AC3241E00AE909D /* BidappAdmobAdapter.framework */,
+				74EBD7ED2ABDB94D009BE472 /* BidappChartboostAdapter.framework */,
+				7419209B2A44F0E4003044B0 /* PrebidMobile.xcframework */,
+				741920992A44F0D4003044B0 /* BidappAdKernelAdapter.framework */,
+				7424314D2A17F50600C324B1 /* BidappApplovinMaxAdapter.framework */,
+				7424314F2A17F50600C324B1 /* BidappLiftoffAdapter.framework */,
+				742431512A17F50600C324B1 /* BidappUnityAdapter.framework */,
+				7424311B2A17F41900C324B1 /* BidappApplovinAdapter.framework */,
+				FF29AA4129CB39BB007BFF54 /* bidapp.framework */,
+				FF567B8429A78F9B001FE7F8 /* AppTrackingTransparency.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FF5E148029885110004FA12E /* bidappPlayground */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF5E149A29885114004FA12E /* Build configuration list for PBXNativeTarget "bidappPlayground" */;
+			buildPhases = (
+				FF5E147D29885110004FA12E /* Sources */,
+				FF5E147E29885110004FA12E /* Frameworks */,
+				FF5E147F29885110004FA12E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = bidappPlayground;
+			productName = bidappPlayground;
+			productReference = FF5E148129885110004FA12E /* bidappPlayground.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FF5E147929885110004FA12E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					FF5E148029885110004FA12E = {
+						CreatedOnToolsVersion = 14.0.1;
+						LastSwiftMigration = 1420;
+					};
+				};
+			};
+			buildConfigurationList = FF5E147C29885110004FA12E /* Build configuration list for PBXProject "bidappPlayground" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FF5E147829885110004FA12E;
+			productRefGroup = FF5E148229885110004FA12E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FF5E148029885110004FA12E /* bidappPlayground */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FF5E147F29885110004FA12E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF5E149429885114004FA12E /* LaunchScreen.storyboard in Resources */,
+				FF5E149129885114004FA12E /* Assets.xcassets in Resources */,
+				FF5E148F29885110004FA12E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FF5E147D29885110004FA12E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74BC8BBA2AE04B1D00DF2EAF /* BannerDelegate.m in Sources */,
+				74BC8BB92AE04B1D00DF2EAF /* BannersTableViewController.m in Sources */,
+				74BC8BBB2AE04B1D00DF2EAF /* FullscreenLoadDelegate.m in Sources */,
+				74BC8BC02AE04CBA00DF2EAF /* tools.m in Sources */,
+				74BC8BB82AE04B1D00DF2EAF /* AppDelegate.m in Sources */,
+				74BC8BBC2AE04B1D00DF2EAF /* main.m in Sources */,
+				74BC8BBD2AE04B1D00DF2EAF /* FullscreenShowDelegate.m in Sources */,
+				74BC8BB72AE04B1D00DF2EAF /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FF5E148D29885110004FA12E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FF5E148E29885110004FA12E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FF5E149229885114004FA12E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FF5E149329885114004FA12E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FF5E149829885114004FA12E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FF5E149929885114004FA12E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FF5E149B29885114004FA12E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4SF44C5VKM;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = bidappPlayground/Info.plist;
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "For purpose of personalized ads to you.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.bidapp.demo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FF5E149C29885114004FA12E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4SF44C5VKM;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = bidappPlayground/Info.plist;
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "For purpose of personalized ads to you.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.bidapp.demo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FF5E147C29885110004FA12E /* Build configuration list for PBXProject "bidappPlayground" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF5E149829885114004FA12E /* Debug */,
+				FF5E149929885114004FA12E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF5E149A29885114004FA12E /* Build configuration list for PBXNativeTarget "bidappPlayground" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF5E149B29885114004FA12E /* Debug */,
+				FF5E149C29885114004FA12E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FF5E147929885110004FA12E /* Project object */;
+}
