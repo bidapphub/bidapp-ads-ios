@@ -18,8 +18,6 @@
 @interface BIDLiftoffRewarded()<VungleRewardedDelegate>
 {
 	id<BIDNetworkFullscreen> __weak networkFullscreen;
-
-	BOOL isRewarded;
 }
 
 @property (nonatomic, strong) VungleRewarded *rewardedAd;
@@ -37,7 +35,6 @@
 		networkFullscreen = ntFull;
 		
 		_placementId = adTag_;
-		isRewarded = isRewarded_;
 
 		_rewardedAd = [[VungleRewarded alloc]initWithPlacementId:adTag_];
 		_rewardedAd.delegate = self;
@@ -117,6 +114,11 @@
 - (void)rewardedAdDidRewardUser:(VungleRewarded *)rewarded
 {
 	[networkFullscreen onReward];
+}
+
+-(void)setUserId:(NSString *)userId_
+{
+    [_rewardedAd setUserIdWithUserId:userId_];
 }
 
 @end

@@ -22,6 +22,8 @@
 @property (nonatomic,readonly) NSString* adUnitId;
 @property (nonatomic) GADRewardedAd* loadedAd;
 @property (nonatomic,readonly, weak) id<BIDNetworkFullscreen> networkFullscreen;
+@property (nonatomic, readonly) NSString* userId;
+@property (nonatomic, readonly) BOOL userIdWasSet;
 
 @end
 
@@ -66,6 +68,14 @@
         {
             BIDLog(weakSelf,@"Ad loaded at AdUnitID %@", weakSelf.adUnitId);
             
+            GADServerSideVerificationOptions *options = [[GADServerSideVerificationOptions alloc] init];
+
+            if (weakSelf.userIdWasSet)
+            {
+                options.userIdentifier = weakSelf.userId;
+            }
+            
+            ad.serverSideVerificationOptions = options;
             ad.fullScreenContentDelegate = weakSelf;
             
             [weakSelf.networkFullscreen onAdLoaded];
@@ -139,6 +149,16 @@
 - (void)adDidRecordClick:(nonnull id<GADFullScreenPresentingAd>)ad
 {
     [_networkFullscreen onClick];
+}
+
+-(void)setUserId:(NSString*)userIdentifier
+{
+    _userId = userIdentifier;
+    _userIdWasSet = YES;
+    
+    GADServerSideVerificationOptions *options = [[GADServerSideVerificationOptions alloc] init];
+    options.userIdentifier = userIdentifier;
+    _loadedAd.serverSideVerificationOptions = options;
 }
 
 @end

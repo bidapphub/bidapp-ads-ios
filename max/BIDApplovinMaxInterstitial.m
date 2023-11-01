@@ -124,4 +124,16 @@
 	[adapter onHide];
 }
 
+#pragma mark - revenue
+
+-(NSNumber*)revenue
+{
+    if (!_ad)
+    {
+        return nil;
+    }
+    
+    return @(_ad.revenue);
+}
+
 @end

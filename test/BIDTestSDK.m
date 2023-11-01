@@ -11,7 +11,6 @@
 
 #import "BIDNetworkSettings.h"
 #import "BIDTestBanner.h"
-#import "BIDAdInfo_private.h"
 #import "BIDAdFormat.h"
 #import "NSError+Categories.h"
 
@@ -28,7 +27,7 @@
 	NSString* sdkKey;
 }
 
--(id)initWithNetworkSDK:(id<BIDNetworkSDK>)ntSDK SDKKey:(NSString*)accId
+-(id)initWithNetworkSDK:(id<BIDNetworkSDK>)ntSDK SDKKey:(NSString*)accId secondKey:(NSString * _Nullable)secondKey
 {
 	if (self == [super init])
 	{

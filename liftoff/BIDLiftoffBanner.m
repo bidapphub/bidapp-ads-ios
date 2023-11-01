@@ -11,7 +11,6 @@
 
 #import <VungleAdsSDK/VungleAdsSDK.h>
 
-#import "BIDAdInfo_private.h"
 #import "BIDAdFormat.h"
 #import "BIDNetworkSettings.h"
 #import "NSError+Categories.h"

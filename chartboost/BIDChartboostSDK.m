@@ -11,7 +11,6 @@
 
 #import "BIDNetworkSettings.h"
 #import "BIDTestBanner.h"
-#import "BIDAdInfo_private.h"
 #import "BIDAdFormat.h"
 #import "NSError+Categories.h"
 
@@ -32,15 +31,19 @@
     NSString* appSignature;
 }
 
--(id)initWithNetworkSDK:(id<BIDNetworkSDK>)ntSDK SDKKey:(NSString*)accId
+-(id)initWithNetworkSDK:(id<BIDNetworkSDK>)ntSDK SDKKey:(NSString*)accId secondKey:(NSString * _Nullable)secondKey
 {
 	if (self == [super init])
 	{
+        if (!secondKey)
+        {
+            return nil;
+        }
+        
         _networkSDK = ntSDK;
         
-        NSArray* keys = [accId componentsSeparatedByString:@":"];
-        appId = keys.firstObject;
-        appSignature = keys.lastObject;
+        appId = accId;
+        appSignature = secondKey;
 	}
 	
 	return self;

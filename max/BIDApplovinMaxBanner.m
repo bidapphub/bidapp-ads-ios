@@ -11,7 +11,6 @@
 
 #import <AppLovinSDK/AppLovinSDK.h>
 
-#import "BIDAdInfo_private.h"
 #import "BIDAdFormat.h"
 #import "BIDNetworkSettings.h"
 #import "NSError+Categories.h"
@@ -156,5 +155,18 @@
 - (void)didExpandAd:(MAAd *)ad { }
 
 - (void)didCollapseAd:(MAAd *)ad { }
+
+#pragma mark - revenue
+
+-(NSNumber*)revenue
+{
+    if (!_cachedAd)
+    {
+        return nil;
+    }
+    
+    return @(_cachedAd.revenue);
+}
+
 
 @end

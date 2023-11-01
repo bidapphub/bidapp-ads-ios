@@ -13,7 +13,6 @@
 #import "BIDApplovinInitializer.h"
 #import "BIDNetworkSettings.h"
 #import "BIDApplovinBanner.h"
-#import "BIDAdInfo_private.h"
 #import "BIDAdFormat.h"
 #import "NSError+Categories.h"
 #import "BIDLogger.h"
@@ -24,7 +23,7 @@
 	NSString* sdkKey;
 }
 
--(id)initWithNetworkSDK:(id<BIDNetworkSDK>)ntSDK SDKKey:(NSString*)sdkKey_
+-(id)initWithNetworkSDK:(id<BIDNetworkSDK>)ntSDK SDKKey:(NSString*)sdkKey_ secondKey:(NSString * _Nullable)secondKey
 {
 	if (self == [super init])
 	{
@@ -116,8 +115,13 @@
 	
 	if (consent.COPPA)
 	{
-		ALPrivacySettings.isAgeRestrictedUser = !consent.COPPA.boolValue;
+		ALPrivacySettings.isAgeRestrictedUser = consent.COPPA.boolValue;
 	}
+}
+
+-(void)setUserId:(NSString *)userId
+{
+    self.alSDK.userIdentifier = userId;
 }
 
 @end

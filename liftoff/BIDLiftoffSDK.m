@@ -13,7 +13,6 @@
 
 #import "BIDNetworkSettings.h"
 #import "BIDLiftoffBanner.h"
-#import "BIDAdInfo_private.h"
 #import "BIDAdFormat.h"
 
 @implementation BIDLiftoffSDK
@@ -24,7 +23,7 @@
 	BOOL testMode;
 }
 
--(id)initWithNetworkSDK:(id<BIDNetworkSDK>)ntSDK SDKKey:(NSString*)sdkK
+-(id)initWithNetworkSDK:(id<BIDNetworkSDK>)ntSDK SDKKey:(NSString*)sdkK secondKey:(NSString * _Nullable)secondKey
 {
 	if (self == [super init])
 	{

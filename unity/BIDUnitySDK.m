@@ -13,7 +13,6 @@
 
 #import "BIDNetworkSettings.h"
 #import "BIDUnityBanner.h"
-#import "BIDAdInfo_private.h"
 #import "BIDAdFormat.h"
 #import "NSError+Categories.h"
 
@@ -30,7 +29,7 @@
 	NSString* sdkKey;
 }
 
--(id)initWithNetworkSDK:(id<BIDNetworkSDK>)ntSDK SDKKey:(NSString*)sdkK
+-(id)initWithNetworkSDK:(id<BIDNetworkSDK>)ntSDK SDKKey:(NSString*)sdkK secondKey:(NSString * _Nullable)secondKey
 {
 	if (self == [super init])
 	{
@@ -136,7 +135,7 @@
 	
 	if (consent.COPPA)
 	{
-		[privacyConsentMetaData set:@"user.nonbehavioral" value:@(!consent.COPPA.boolValue)];
+		[privacyConsentMetaData set:@"user.nonbehavioral" value:@(consent.COPPA.boolValue)];
 		[privacyConsentMetaData commit];
 	}
 }
