@@ -50,7 +50,7 @@
 			NSString *major = verComponents[0];
 			NSString *minor = verComponents[1];
 			NSUInteger compatibleMajor = 7;
-			NSUInteger compatibleMinor = 0;
+			NSUInteger compatibleMinor = 1;
 			if (compatibleMajor == [major integerValue] && compatibleMinor == [minor integerValue])
 			{
 				BIDLog(self, @"Liftoff version is compatible: v.%@",version);

@@ -7,26 +7,13 @@
 //
 
 #import "AppDelegate.h"
-#import "FullscreenLoadDelegate.h"
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
 #import <bidapp/bidapp.h>
-
-@interface AppDelegate ()
-{
-	id<BIDFullscreenLoadDelegate> loadDelegate;
-}
-
-@end
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-	loadDelegate = [FullscreenLoadDelegate new];
-	
-	BIDInterstitial.loadDelegate = loadDelegate;
-	BIDRewarded.loadDelegate = loadDelegate;
-	
+{	
 	BIDConfiguration *bidConfig = [BIDConfiguration new];
 	[bidConfig enableTestMode];
 	[bidConfig enableLogging];

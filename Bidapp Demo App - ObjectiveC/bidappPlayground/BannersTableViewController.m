@@ -188,9 +188,9 @@
 	[self schedulUpdateTableView];
 }
 
-- (void)adView:(BIDBannerView *)adView readyToRefresh:(BIDAdInfo *)adInfo
+- (void)adView:(BIDBannerView *)adView didLoadAd:(BIDAdInfo *)adInfo
 {
-	NSLog(@"App - readyToRefresh. AdView: %@, AdInfo: %@", adView, adInfo);
+	NSLog(@"App - didLoadAd. AdView: %@, AdInfo: %@", adView, adInfo);
 	
 	if (!adView.isAdDisplayed)
 	{

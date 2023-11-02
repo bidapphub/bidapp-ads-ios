@@ -71,7 +71,7 @@
                                                             minor:11
                                                             patch:0] &&
         ![[GADMobileAds sharedInstance]isSDKVersionAtLeastMajor:10
-                                                          minor:12
+                                                          minor:13
                                                           patch:0];
 }
 

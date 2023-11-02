@@ -52,7 +52,7 @@ class BannersTableViewController : UITableViewController,BIDBannerViewDelegate {
     func addOneMoreBanner() {
         if (pendingBanners.count < 2) {
             let format = (arc4random_uniform(2)==0) ? BIDAdFormat.banner_300x250 : BIDAdFormat.banner_320x50
-            let banner = BIDBannerView.banner(with: format, delegate: self)
+            let banner = BIDBannerView.banner(with: format as! BIDAdFormat, delegate: self)
             banner.backgroundColor = UIColor.green
             pendingBanners.append(banner)
         }
@@ -155,8 +155,8 @@ class BannersTableViewController : UITableViewController,BIDBannerViewDelegate {
         schedulUpdateTableView()
     }
     
-    func adView(_ adView: BIDBannerView, readyToRefresh adInfo: BIDAdInfo) {
-        print("App - readyToRefresh. AdView: \(adView), AdInfo: \(adInfo)")
+    func adView(_ adView: BIDBannerView, didLoadAd adInfo: BIDAdInfo) {
+        print("App - didLoadAd. AdView: \(adView), AdInfo: \(adInfo)")
         
         if !adView.isAdDisplayed() {
             addAdToSuperviewIfNeeded(adView)

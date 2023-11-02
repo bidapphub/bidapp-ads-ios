@@ -88,7 +88,7 @@
 			NSString *major = verComponents[0];
 			NSString *minor = verComponents[1];
 			NSUInteger compatibleMajor = 4;
-			NSUInteger compatibleMinor_max = 8;
+			NSUInteger compatibleMinor_max = 9;
 			NSUInteger compatibleMinor_min = 6;
 			if (compatibleMajor == [major integerValue] && compatibleMinor_min <= [minor integerValue] && compatibleMinor_max >= [minor integerValue])
 			{

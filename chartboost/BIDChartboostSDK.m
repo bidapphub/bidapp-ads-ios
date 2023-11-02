@@ -98,7 +98,7 @@
         }
         else if (componentIndex == 1)
         {
-            if (versionComponent != 4)
+            if (versionComponent != 5)
             {
                 return NO;
             }

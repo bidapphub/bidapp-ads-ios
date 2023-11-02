@@ -77,7 +77,7 @@
 	{
 		NSUInteger versionCode = [NetworkClass versionCode];
 		NSUInteger minVerCode = 11070000;
-		NSUInteger maxVerCode = 11110399;
+		NSUInteger maxVerCode = 11110499;
 		if (versionCode >= minVerCode && versionCode <= maxVerCode)
 		{
 			BIDLog(self, @"ApplovinSDK version is compatible: v.%ld",versionCode);

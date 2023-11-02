@@ -10,12 +10,32 @@
 #import "BannersTableViewController.h"
 #import "FullscreenShowDelegate.h"
 #import "BannerDelegate.h"
+#import "FullscreenLoadDelegate.h"
 #import "tools.h"
 #import <bidapp/bidapp.h>
 
 @implementation ViewController
+{
+    FullscreenLoadDelegate* loadDelegate;
+    
+    BIDInterstitial* interstitial;
+    BIDRewarded* rewarded;
+}
 
 static NSMutableArray* delegates = nil;
+
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    loadDelegate = [FullscreenLoadDelegate new];
+    
+    interstitial = [BIDInterstitial new];
+    interstitial.loadDelegate = loadDelegate;
+    
+    rewarded = [BIDRewarded new];
+    rewarded.loadDelegate = loadDelegate;
+}
 
 - (IBAction)onShowInterstitial:(id)sender
 {
@@ -27,7 +47,7 @@ static NSMutableArray* delegates = nil;
 	id interstitialDelegate = [[FullscreenShowDelegate alloc]initWithViewController:self];
 	[delegates addObject:interstitialDelegate];
 	
-	[BIDInterstitial showWithDelegate:interstitialDelegate];
+	[interstitial showWithDelegate:interstitialDelegate];
 }
 
 - (IBAction)onShowRewarded:(id)sender
@@ -40,7 +60,7 @@ static NSMutableArray* delegates = nil;
 	id rewardedDelegate = [[FullscreenShowDelegate alloc]initWithViewController:self];
 	[delegates addObject:rewardedDelegate];
 	
-	[BIDRewarded showWithDelegate:rewardedDelegate];
+	[rewarded showWithDelegate:rewardedDelegate];
 }
 
 - (IBAction)onShowBanners:(id)sender
