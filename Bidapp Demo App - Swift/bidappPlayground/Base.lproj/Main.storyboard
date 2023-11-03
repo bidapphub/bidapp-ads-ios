@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5v-pz-Kif">
-                                <rect key="frame" x="0.0" y="381.5" width="414" height="133"/>
+                                <rect key="frame" x="0.0" y="376.5" width="414" height="143.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nPV-yB-DZd">
-                                        <rect key="frame" x="143.5" y="20" width="127.5" height="31"/>
+                                        <rect key="frame" x="134.5" y="20" width="145" height="34.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Show Interstitial"/>
                                         <connections>
@@ -29,7 +29,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UkD-9c-LAx">
-                                        <rect key="frame" x="143" y="51" width="128" height="31"/>
+                                        <rect key="frame" x="133.5" y="54.5" width="147" height="34.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Show Rewarded"/>
                                         <connections>
@@ -37,7 +37,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOa-kp-ojA" userLabel="Show Banners">
-                                        <rect key="frame" x="149" y="82" width="116" height="31"/>
+                                        <rect key="frame" x="140.5" y="89" width="133" height="34.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Show Banners"/>
                                         <connections>
@@ -57,16 +57,29 @@
                                     <constraint firstItem="UkD-9c-LAx" firstAttribute="top" secondItem="nPV-yB-DZd" secondAttribute="bottom" id="zP4-ik-UUS"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7g9-KA-0YC">
+                                <rect key="frame" x="47" y="812" width="320" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Zl5-eD-E00"/>
+                                    <constraint firstAttribute="width" constant="320" id="f0e-yr-O0a"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="g5v-pz-Kif" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1Md-p4-UIA"/>
+                            <constraint firstItem="7g9-KA-0YC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4F6-bZ-6kl"/>
                             <constraint firstItem="g5v-pz-Kif" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4Kh-zF-fF5"/>
+                            <constraint firstItem="7g9-KA-0YC" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Era-tV-zm9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="g5v-pz-Kif" secondAttribute="trailing" id="S7f-cz-uzw"/>
                             <constraint firstItem="g5v-pz-Kif" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="uc8-ou-Sbg"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bannerBaseView" destination="7g9-KA-0YC" id="EBm-jb-S5D"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

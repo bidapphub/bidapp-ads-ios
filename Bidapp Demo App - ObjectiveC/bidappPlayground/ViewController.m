@@ -20,6 +20,11 @@
     
     BIDInterstitial* interstitial;
     BIDRewarded* rewarded;
+    
+    BannerDelegate* bannerDelegate;
+    BIDBannerView* bannerView;
+    
+    IBOutlet UIView* __weak bannerBaseView;
 }
 
 static NSMutableArray* delegates = nil;
@@ -35,6 +40,11 @@ static NSMutableArray* delegates = nil;
     
     rewarded = [BIDRewarded new];
     rewarded.loadDelegate = loadDelegate;
+    
+    bannerDelegate = [BannerDelegate new];
+    
+    bannerView = [BIDBannerView bannerWithFormat:BIDAdFormat.banner_320x50 delegate:bannerDelegate];
+    [bannerBaseView addSubview:bannerView];
 }
 
 - (IBAction)onShowInterstitial:(id)sender
@@ -67,6 +77,20 @@ static NSMutableArray* delegates = nil;
 {
 	BannersTableViewController *bannersViewController = [[BannersTableViewController alloc] init];
 	[self presentViewController:bannersViewController animated:YES completion:nil];
+}
+
+- (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion
+{
+    [super presentViewController:viewControllerToPresent animated:flag completion:completion];
+    
+    [bannerView stopAutorefresh];
+}
+
+- (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion
+{
+    [super dismissViewControllerAnimated:flag completion:completion];
+    
+    [bannerView startAutorefresh:30.0];
 }
 
 @end
