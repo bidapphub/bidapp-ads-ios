@@ -183,8 +183,38 @@
                      withError:(UnityAdsLoadError)error
                    withMessage:(NSString *)message
 {
-	BIDLog(self, @"unityAdsAdFailedToLoad: %@ error: %ld message: %@", placementId, error, message);
-	
+    NSString* prefix = @"";
+    switch (error) {
+        case kUnityAdsLoadErrorInitializeFailed:
+            prefix = @"kUnityAdsLoadErrorInitializeFailed. ";
+            break;
+            
+        case kUnityAdsLoadErrorInternal:
+            prefix = @"kUnityAdsLoadErrorInternal. ";
+            break;
+            
+        case kUnityAdsLoadErrorInvalidArgument:
+            prefix = @"kUnityAdsLoadErrorInvalidArgument. ";
+            break;
+            
+        case kUnityAdsLoadErrorNoFill:
+            prefix = @"kUnityAdsLoadErrorNoFill. ";
+            break;
+            
+        case kUnityAdsLoadErrorTimeout:
+            prefix = @"kUnityAdsLoadErrorTimeout. ";
+            break;
+            
+        default:
+            break;
+    }
+    
+    BIDLog(self, @"unityAdsAdFailedToLoad: %@ error: %@message: %@", placementId, prefix, message);
+    
+    NSError* e = [NSError errorWithDomain:@"io.bidapp" code:(923745+(int)error) userInfo:@{NSLocalizedDescriptionKey : [NSString stringWithFormat:@"%@%@", prefix, message]}];
+    
+    [networkFullscreen onAdFailedToLoadWithError:e];
+    
 	[networkFullscreen onAdFailedToLoadWithError:[NSError errorWithNetworkId:UNITY_ADAPTER_UID code:error description:message]];
 }
 
@@ -236,10 +266,48 @@
 
 - (void)unityAdsShowFailed:(NSString *)placementId withError:(UnityAdsShowError)error withMessage:(NSString *)message
 {
-	NSError* e = [NSError errorWithNetworkId:UNITY_ADAPTER_UID code:error description:message];
+    NSString* prefix = @"";
+    switch (error) {
+        case kUnityShowErrorNotInitialized:
+            prefix = @"kUnityShowErrorNotReady. ";
+            break;
+            
+        case kUnityShowErrorNotReady:
+            prefix = @"kUnityShowErrorNotReady. ";
+            break;
+            
+        case kUnityShowErrorVideoPlayerError:
+            prefix = @"kUnityShowErrorVideoPlayerError. ";
+            break;
+            
+        case kUnityShowErrorInvalidArgument:
+            prefix = @"kUnityShowErrorInvalidArgument. ";
+            break;
+            
+        case kUnityShowErrorNoConnection:
+            prefix = @"kUnityShowErrorNoConnection. ";
+            break;
+            
+        case kUnityShowErrorAlreadyShowing:
+            prefix = @"kUnityShowErrorAlreadyShowing. ";
+            break;
+            
+        case kUnityShowErrorInternalError:
+            prefix = @"kUnityShowErrorInternalError. ";
+            break;
+            
+        case kUnityShowErrorTimeout:
+            prefix = @"kUnityShowErrorTimeout. ";
+            break;
+            
+        default:
+            break;
+    };
+    
+    NSError* e = [NSError errorWithDomain:@"io.bidapp" code:(4854865+(int)error) userInfo:@{NSLocalizedDescriptionKey : [NSString stringWithFormat:@"%@%@", prefix, message]}];
 	useCloseEventWorkaround = unityAdControllerOpened && !unityAdControllerClosed;
 	
-	BIDLog(self,@"unityAdsShowFailed: %@ %ld %@ useCloseWorkaround: %d", placementId, error, message, useCloseEventWorkaround);
+	BIDLog(self,@"unityAdsShowFailed: %@ %@%@ useCloseWorkaround: %d", placementId, prefix, message, useCloseEventWorkaround);
 	
 	[networkFullscreen onFailedToDisplay:e andToClose:useCloseEventWorkaround];
 }

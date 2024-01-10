@@ -4,14 +4,17 @@ target 'bidappPlayground' do
   use_frameworks!
 
   ### canonical pod 'bidapp' will install all available adapters
-  pod 'bidapp/SDK', '2.1.2'
+  pod 'bidapp/SDK'
   
   ### for conrol over installed adapters, comment pod 'bidapp'
   ### and uncomment adapters that you would like to use in project
-  pod 'bidapp/Applovin', '2.1.2'
-  pod 'bidapp/ApplovinMax', '2.1.2'
-  pod 'bidapp/Unity', '2.1.2'
-  pod 'bidapp/Liftoff', '2.1.2'
-  pod 'bidapp/Chartboost', '2.1.2'
-  pod 'bidapp/AdMob', '2.1.2'
+  pod 'bidapp/Applovin'
+  pod 'bidapp/ApplovinMax'
+  pod 'bidapp/Unity'
+  pod 'bidapp/Liftoff'
+  pod 'bidapp/Chartboost'
+  pod 'bidapp/AdMob'
+  pod 'bidapp/Facebook'
+  #pod 'bidapp/Fyber'
+  pod 'bidapp/StartApp'
 end

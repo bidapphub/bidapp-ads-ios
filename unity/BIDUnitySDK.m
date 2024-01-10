@@ -63,8 +63,28 @@
 {
 	BIDLog(self,@"SDK NOT initialized. Error: %@",message);
 
+    NSString* prefix = @"";
+    switch (error) {
+        case kUnityInitializationErrorInternalError:
+            prefix = @"kUnityInitializationErrorInternalError. ";
+            break;
+
+        case kUnityInitializationErrorInvalidArgument:
+            prefix = @"kUnityInitializationErrorInvalidArgument. ";
+            break;
+
+        case kUnityInitializationErrorAdBlockerDetected:
+            prefix = @"kUnityInitializationErrorAdBlockerDetected. ";
+            break;
+            
+        default:
+            break;
+    }
+    
+    NSError* nsError = [NSError errorWithDomain:@"io.bidapp" code:(284445+(int)error) userInfo:@{NSLocalizedDescriptionKey : [NSString stringWithFormat:@"%@%@", prefix, message]}];
+
 	[networkSDK onInitializationComplete:NO
-								 error:[NSError errorWithCode:error description:message]];
+								 error:nsError];
 }
 
 - (BOOL)isInitialized

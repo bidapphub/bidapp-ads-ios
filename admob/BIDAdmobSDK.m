@@ -99,7 +99,7 @@ static NSNumber* currentConsent_GDPR = nil;
 
     if (consent.CCPA)
     {
-        if (consent.CCPA.boolValue)
+        if (!consent.CCPA.boolValue)
         {
             // Restrict data processing - https://developers.google.com/admob/ios/ccpa
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"gad_rdp"];
@@ -108,6 +108,11 @@ static NSNumber* currentConsent_GDPR = nil;
         {
             [[NSUserDefaults standardUserDefaults] removeObjectForKey: @"gad_rdp"];
         }
+    }
+    
+    if (consent.COPPA)
+    {
+        GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment = consent.COPPA;
     }
 }
 
