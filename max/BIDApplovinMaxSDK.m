@@ -12,10 +12,12 @@
 
 #import <AppLovinSDK/AppLovinSDK.h>
 
+#import "BIDApplovinMaxInterstitial.h"
+#import "BIDApplovinMaxRewarded.h"
+#import "BIDApplovinMaxBanner.h"
 #import "BIDNetworkSettings.h"
 #import "BIDApplovinMaxBanner.h"
 #import "BIDAdFormat.h"
-#import "NSError+Categories.h"
 
 @implementation BIDApplovinMaxSDK
 {
@@ -57,7 +59,9 @@
 			if (strongSelf)
 			{
 				[strongSelf->adapter onInitializationComplete:weakSelf.isInitialized
-														 error:weakSelf.isInitialized ? nil : [NSError error_sdkNotInitialized]];
+														 error:weakSelf.isInitialized ? nil : [NSError errorWithDomain:@"io.bidapp"
+                                                                                                                  code:503503
+                                                                                                          userInfo:@{NSLocalizedDescriptionKey:@"SDK is not Initialized yet"}]];
 			}
 		}];
 	}
@@ -68,28 +72,13 @@
 	return self.alSDK.isInitialized;
 }
 
-+ (BOOL)sdkAvailableWithCompatibleVersion
++ (BOOL)sdkAvailableWithCompatibleVersion:(validate_selectors_t)validate
 {
-	Class NetworkClass = NSClassFromString(@"ALSdk");
-	BIDLog(self, @"ApplovinSDK SDK Available: %@.",(Nil!=NetworkClass)?@"YES":@"NO");
-	
-	if (Nil!=NetworkClass)
-	{
-		NSUInteger versionCode = [NetworkClass versionCode];
-		NSUInteger minVerCode = 11070000;
-		NSUInteger maxVerCode = 11110499;
-		if (versionCode >= minVerCode && versionCode <= maxVerCode)
-		{
-			BIDLog(self, @"ApplovinSDK version is compatible: v.%ld",versionCode);
-			return YES;
-		}
-		else
-		{
-			BIDLog(self, @"ApplovinSDK version is NOT compatible: v.%ld. Compatable versions between: %ld - %ld",versionCode,minVerCode,maxVerCode);
-			return NO;
-		}
-	}
-	return NO;
+    BOOL interstitialDelegatesAreValid = validate(BIDApplovinMaxInterstitial.class, BIDApplovinMaxInterstitial.delegateMethodsToValidate);
+    BOOL rewardedDelegatesAreValid = validate(BIDApplovinMaxRewarded.class, BIDApplovinMaxRewarded.delegateMethodsToValidate);
+    BOOL bannerDelegatesAreValid = validate(BIDApplovinMaxBanner.class, BIDApplovinMaxBanner.delegateMethodsToValidate);
+    
+    return interstitialDelegatesAreValid && rewardedDelegatesAreValid && bannerDelegatesAreValid;
 }
 
 - (void)enableTesting

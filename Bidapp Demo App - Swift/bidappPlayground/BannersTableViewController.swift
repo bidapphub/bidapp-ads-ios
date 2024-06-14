@@ -155,31 +155,35 @@ class BannersTableViewController : UITableViewController,BIDBannerViewDelegate {
         schedulUpdateTableView()
     }
     
-    func adView(_ adView: BIDBannerView, didLoadAd adInfo: BIDAdInfo) {
-        print("App - didLoadAd. AdView: \(adView), AdInfo: \(adInfo)")
+    func bannerDidLoad(_ banner: BIDBannerView, adInfo: BIDAdInfo) {
+        print("App - didLoadAd. AdView: \(banner), AdInfo: \(adInfo)")
         
-        if !adView.isAdDisplayed() {
-            addAdToSuperviewIfNeeded(adView)
+        if !banner.isAdDisplayed() {
+            addAdToSuperviewIfNeeded(banner)
             
-            adView.refreshAd()
+            banner.refreshAd()
         }
     }
     
-    func adView(_ adView: BIDBannerView, didDisplayAd adInfo: BIDAdInfo) {
-        print("App - didDisplayAd. AdView: \(adView), AdInfo: \(adInfo)", adView, adInfo);
+    func bannerDidDisplay(_ banner: BIDBannerView, adInfo: BIDAdInfo) {
+        print("App - didDisplayAd. AdView: \(banner), AdInfo: \(adInfo)", banner, adInfo);
         
-        addAdToSuperviewIfNeeded(adView)
+        addAdToSuperviewIfNeeded(banner)
     }
     
-    func adView(_ adView: BIDBannerView, didFailToDisplayAd adInfo: BIDAdInfo, error: Error) {
-        print("App - didFailToDisplayAd. AdView: \(adView), Error: \(error)");
+    func bannerDidFail(toDisplay banner: BIDBannerView, adInfo: BIDAdInfo, error: Error) {
+        print("App - didFailToDisplayAd. AdView: \(banner), Error: \(error)");
         
-        if let index = pendingBanners.firstIndex(of: adView) {
+        if let index = pendingBanners.firstIndex(of: banner) {
             pendingBanners.remove(at: index)
         }
     }
     
-    func adView(_ adView: BIDBannerView, didClicked adInfo: BIDAdInfo) {
-        print("App - didClicked. AdView: \(adView), AdInfo: \(adInfo)")
+    func bannerDidClick(_ banner: BIDBannerView, adInfo: BIDAdInfo) {
+        print("App - didClicked. AdView: \(banner), AdInfo: \(adInfo)")
+    }
+    
+    func allNetworksFailedToDisplayAd(inBanner banner: BIDBannerView) {
+        print("App - allNetworksFailedToDisplayAd \(banner)")
     }
 }

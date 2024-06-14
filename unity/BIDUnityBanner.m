@@ -13,7 +13,6 @@
 
 #import "BIDAdFormat.h"
 #import "BIDNetworkSettings.h"
-#import "NSError+Categories.h"
 
 @interface BIDUnityBanner () <UADSBannerViewDelegate>
 {
@@ -82,6 +81,19 @@
     adView = nil;
 }
 
++(NSPointerArray*)delegateMethodsToValidate
+{
+    NSPointerArray *selectors = [[NSPointerArray alloc] initWithOptions: NSPointerFunctionsOpaqueMemory];
+    
+    [selectors addPointer:@selector(bannerViewDidLoad:)];
+    [selectors addPointer:@selector(bannerViewDidShow:)];
+    [selectors addPointer:@selector(bannerViewDidError:error:)];
+    [selectors addPointer:@selector(bannerViewDidClick:)];
+    [selectors addPointer:@selector(bannerViewDidLeaveApplication:)];
+    
+    return selectors;
+}
+
 #pragma mark - BIDCacheable
 
 - (BOOL)isAdReady
@@ -89,7 +101,7 @@
 	return ready;
 }
 
-- (void)load
+- (void)loadWithBid:(id<BidappBid>)bid
 {
 	[adView load];
 }

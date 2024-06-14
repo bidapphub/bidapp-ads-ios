@@ -2,7 +2,6 @@
 //  BIDLiftoffInterstitial.m
 //  bidapp
 //
-//  Created by Mikhail Krasnorutskiy on 19/4/23.
 //  Copyright © 2023 bidapp. All rights reserved.
 //
 
@@ -13,7 +12,8 @@
 #import "BIDNetworkFullscreen.h"
 #import "BIDAdFormat.h"
 #import "BIDNetworkSDK.h"
-#import "NSError+Categories.h"
+#import "BidappBid.h"
+#import "BIDOpenRTBRequester.h"
 
 #import <VungleAdsSDK/VungleAdsSDK.h>
 
@@ -26,7 +26,7 @@
 
 @property (nonatomic, strong) VungleInterstitial *interstitialAd;
 @property (nonatomic,readonly) NSString* placementId;
-@property (nonatomic,strong) NSString *loadedPlacementId;
+@property (nonatomic,strong) NSString* loadedPlacementId;
 
 @end
 
@@ -55,9 +55,9 @@
 
 #pragma mark - Load ad
 
--(void)load
+-(void)loadWithBid:(id<BidappBid>)bid
 {
-	[_interstitialAd load:nil];
+	[_interstitialAd load:(NSString*)bid.nativeBid];
 }
 
 #pragma mark - VungleInterstitialDelegate - load
@@ -69,9 +69,12 @@
 	[networkFullscreen onAdLoaded];
 }
 
-- (void)interstitialAdDidFailToLoad:(VungleInterstitial * _Nonnull)interstitial withError:(NSError * _Nonnull)withError
+- (void)interstitialAdDidFailToLoad:(VungleInterstitial * _Nonnull)interstitial withError:(NSError * _Nonnull)e
 {
-	[networkFullscreen onAdFailedToLoadWithError:[NSError bidappError:withError forNetworkId:LIFTOFF_ADAPTER_UID]];
+    NSString *message = (nil!=e.localizedDescription) ? e.localizedDescription : @"Unknown error";
+    [networkFullscreen onAdFailedToLoadWithError:[NSError errorWithDomain:@"io.bidapp.liftoff"
+                                                                     code:e.code ? e.code : 395822
+                                                                 userInfo:@{NSLocalizedDescriptionKey:message}]];
 }
 
 #pragma mark - Display ad
@@ -94,6 +97,19 @@
 	return YES;
 }
 
++(NSPointerArray*)delegateMethodsToValidate
+{
+    NSPointerArray *selectors = [[NSPointerArray alloc] initWithOptions: NSPointerFunctionsOpaqueMemory];
+
+    [selectors addPointer:@selector(interstitialAdDidLoad:)];
+    [selectors addPointer:@selector(interstitialAdDidFailToLoad:withError:)];
+    [selectors addPointer:@selector(interstitialAdDidFailToPresent:withError:)];
+    [selectors addPointer:@selector(interstitialAdDidClose:)];
+    [selectors addPointer:@selector(interstitialAdDidClick:)];
+    
+    return selectors;
+}
+
 #pragma mark - VungleSDKDelegate - show
 
 - (void)interstitialAdDidPresent:(VungleInterstitial * _Nonnull)interstitial
@@ -114,6 +130,40 @@
 - (void)interstitialAdDidClick:(VungleInterstitial * _Nonnull)interstitial
 {
 	[networkFullscreen onClick];
+}
+
+#pragma mark - bidding
+
+static NSString* publisherId_ = nil;
+static NSString* appId_ = nil;
++(void)setAppId:(NSString*)appId publisherId:(NSString*)publisherId
+{
+    appId_ = appId;
+    publisherId_ = publisherId;
+}
+
++ (void)bidWithRequester:(id<BIDOpenRTBRequester>)requester
+                   adTag:(NSString*)adTag
+                  format:(id<BIDAdFormat>)format
+                testMode:(BOOL)testMode
+                 timeout:(NSTimeInterval)timeout
+              completion:(bidding_complete_t)completion
+{
+    if (nil == appId_ ||
+        nil == publisherId_)
+    {
+        return completion(nil, adTag, [NSError errorWithDomain:@"io.bidapp.liftoff"
+                                                          code:399122
+                                                      userInfo:@{NSLocalizedDescriptionKey:@"Vungle publisherId or appId is absent. They are required to perform bid request."}]);
+    }
+    
+    [requester bidWithToken:VungleAds.getBiddingToken
+                publisherId:publisherId_
+                      appId:appId_
+                      adTag:adTag
+                     format:format
+                       test:testMode
+                 completion:completion];
 }
 
 @end

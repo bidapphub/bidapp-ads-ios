@@ -2,7 +2,6 @@
 //  BIDLiftoffRewarded.m
 //  bidapp
 //
-//  Created by Mikhail Krasnorutskiy on 19/4/23.
 //  Copyright © 2023 bidapp. All rights reserved.
 //
 
@@ -13,7 +12,6 @@
 #import "BIDNetworkFullscreen.h"
 #import "BIDAdFormat.h"
 #import "BIDNetworkSDK.h"
-#import "NSError+Categories.h"
 
 @interface BIDLiftoffRewarded()<VungleRewardedDelegate>
 {
@@ -50,7 +48,7 @@
 
 #pragma mark - Load ad
 
--(void)load
+-(void)loadWithBid:(id<BidappBid>)bid
 {
 	[_rewardedAd load:nil];
 }
@@ -64,9 +62,12 @@
 	[networkFullscreen onAdLoaded];
 }
 
-- (void)rewardedAdDidFailToLoad:(VungleRewarded *)rewarded withError:(NSError *)withError
+- (void)rewardedAdDidFailToLoad:(VungleRewarded *)rewarded withError:(NSError *)e
 {
-	[networkFullscreen onAdFailedToLoadWithError:[NSError bidappError:withError forNetworkId:LIFTOFF_ADAPTER_UID]];
+    NSString *message = (nil!=e.localizedDescription) ? e.localizedDescription : @"Unknown error";
+    [networkFullscreen onAdFailedToLoadWithError:[NSError errorWithDomain:@"io.bidapp.liftoff"
+                                                                     code:e.code ? e.code : 395822
+                                                                 userInfo:@{NSLocalizedDescriptionKey:message}]];
 }
 
 #pragma mark - Display ad
@@ -87,6 +88,20 @@
 	[_rewardedAd presentWith:vc];
 
 	return YES;
+}
+
++(NSPointerArray*)delegateMethodsToValidate
+{
+    NSPointerArray *selectors = [[NSPointerArray alloc] initWithOptions: NSPointerFunctionsOpaqueMemory];
+
+    [selectors addPointer:@selector(rewardedAdDidLoad:)];
+    [selectors addPointer:@selector(rewardedAdDidFailToLoad:withError:)];
+    [selectors addPointer:@selector(rewardedAdDidFailToPresent:withError:)];
+    [selectors addPointer:@selector(rewardedAdDidClose:)];
+    [selectors addPointer:@selector(rewardedAdDidClick:)];
+    [selectors addPointer:@selector(rewardedAdDidRewardUser:)];
+    
+    return selectors;
 }
 
 #pragma mark - VungleSDKDelegate - show

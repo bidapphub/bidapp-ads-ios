@@ -12,7 +12,6 @@
 #import "BIDNetworkSettings.h"
 #import "BIDTestBanner.h"
 #import "BIDAdFormat.h"
-#import "NSError+Categories.h"
 
 #import "TestSDK.h"
 
@@ -58,7 +57,7 @@
     return [TestSDK isInitialized];
 }
 
-+ (BOOL)sdkAvailableWithCompatibleVersion
++ (BOOL)sdkAvailableWithCompatibleVersion:(validate_selectors_t)validate
 {
     return YES;
 }

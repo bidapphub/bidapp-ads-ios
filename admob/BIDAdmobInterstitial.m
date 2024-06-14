@@ -2,7 +2,6 @@
 //  BIDAdmobInterstitial.m
 //  bidapp
 //
-//  Created by Mikhail Krasnorutskiy on 19/4/23.
 //  Copyright © 2023 bidapp. All rights reserved.
 //
 
@@ -14,7 +13,6 @@
 #import "BIDNetworkFullscreen.h"
 #import "BIDAdFormat.h"
 #import "BIDNetworkSDK.h"
-#import "NSError+Categories.h"
 
 #import <GoogleMobileAds/GoogleMobileAds.h>
 
@@ -45,7 +43,7 @@
 
 #pragma mark - Load ad
 
--(void)load
+-(void)loadWithBid:(id<BidappBid>)bid
 {
 	BIDLog(self, @"_load %@", _adUnitId);
     
@@ -105,6 +103,18 @@
 -(BOOL)shouldWaitForAdToDisplay
 {
     return YES;
+}
+
++(NSPointerArray*)delegateMethodsToValidate
+{
+    NSPointerArray *selectors = [[NSPointerArray alloc] initWithOptions: NSPointerFunctionsOpaqueMemory];
+
+    [selectors addPointer:@selector(adWillPresentFullScreenContent:)];
+    [selectors addPointer:@selector(ad:didFailToPresentFullScreenContentWithError:)];
+    [selectors addPointer:@selector(adDidDismissFullScreenContent:)];
+    [selectors addPointer:@selector(adDidRecordClick:)];
+    
+    return selectors;
 }
 
 #pragma mark - GADFullScreenContentDelegate

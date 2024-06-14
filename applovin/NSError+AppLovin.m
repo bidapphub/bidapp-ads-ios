@@ -2,12 +2,10 @@
 //  NSError+AppLovin.m
 //  bidapp
 //
-//  Created by Mikhail Krasnorutskiy on 28/4/23.
 //  Copyright © 2023 bidapp. All rights reserved.
 //
 
 #import "NSError+AppLovin.h"
-#import "NSError+Categories.h"
 #import "BIDNetworkSettings.h"
 #import <AppLovinSDK/AppLovinSDK.h>
 
@@ -76,7 +74,7 @@
 		*pIsLoadError = isLoadError;
 	}
 	
-	return [NSError errorWithDomain:[NSError domainForNetworkId:APPLOVIN_ADAPTER_UID]
+	return [NSError errorWithDomain:@"io.bidapp.applovin"
 							   code:code
 						   userInfo:@{NSLocalizedDescriptionKey:message}];
 }

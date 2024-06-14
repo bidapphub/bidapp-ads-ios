@@ -11,7 +11,6 @@
 #import "TestBannerView.h"
 #import "BIDAdFormat.h"
 #import "BIDNetworkSettings.h"
-#import "NSError+Categories.h"
 
 @interface BIDTestBanner () <TestBannerViewDelegate>
 {
@@ -80,7 +79,7 @@
 	return ready;
 }
 
-- (void)load
+- (void)loadWithBid:(id<BidappBid>)bid
 {
     [adView showAdWithDelegate:self];
 }

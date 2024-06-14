@@ -2,7 +2,6 @@
 //  BIDApplovinRewarded.m
 //  bidapp
 //
-//  Created by Mikhail Krasnorutskiy on 19/4/23.
 //  Copyright © 2023 bidapp. All rights reserved.
 //
 
@@ -64,7 +63,7 @@
 
 #pragma mark - Load ad
 
--(void)load
+-(void)loadWithBid:(id<BidappBid>)bid
 {
 	[_rewardedAd preloadAndNotify:self];
 }
@@ -126,6 +125,23 @@
     }
 
 	[adapter onHide];
+}
+
++(NSPointerArray*)delegateMethodsToValidate
+{
+    NSPointerArray *selectors = [[NSPointerArray alloc] initWithOptions: NSPointerFunctionsOpaqueMemory];
+    
+    [selectors addPointer:@selector(adService:didLoadAd:)];
+    [selectors addPointer:@selector(adService:didFailToLoadAdWithError:)];
+    [selectors addPointer:@selector(ad:wasDisplayedIn:)];
+    [selectors addPointer:@selector(ad:wasClickedIn:)];
+    [selectors addPointer:@selector(ad:wasHiddenIn:)];
+    [selectors addPointer:@selector(rewardValidationRequestForAd:didSucceedWithResponse:)];
+    [selectors addPointer:@selector(rewardValidationRequestForAd:didExceedQuotaWithResponse:)];
+    [selectors addPointer:@selector(rewardValidationRequestForAd:wasRejectedWithResponse:)];
+    [selectors addPointer:@selector(rewardValidationRequestForAd:didFailWithError:)];
+    
+    return selectors;
 }
 
 #pragma mark - ALAdRewardDelegate Protocol

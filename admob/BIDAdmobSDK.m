@@ -9,10 +9,12 @@
 #import "BIDAdmobSDK.h"
 #import "BIDLogger.h"
 
+#import "BIDAdmobInterstitial.h"
+#import "BIDAdmobRewarded.h"
+#import "BIDAdmobBanner.h"
 #import "BIDNetworkSettings.h"
 #import "BIDAdmobBanner.h"
 #import "BIDAdFormat.h"
-#import "NSError+Categories.h"
 
 #import <GoogleMobileAds/GoogleMobileAds.h>
 
@@ -59,20 +61,13 @@
     return self.initialized;
 }
 
-+ (BOOL)sdkAvailableWithCompatibleVersion
++ (BOOL)sdkAvailableWithCompatibleVersion:(validate_selectors_t)validate
 {
-    if (![GADMobileAds respondsToSelector:@selector(sharedInstance)] ||
-        ![GADMobileAds.sharedInstance respondsToSelector:@selector(isSDKVersionAtLeastMajor:minor:patch:)])
-    {
-        return NO;
-    }
+    BOOL interstitialDelegatesAreValid = validate(BIDAdmobInterstitial.class, BIDAdmobInterstitial.delegateMethodsToValidate);
+    BOOL rewardedDelegatesAreValid = validate(BIDAdmobRewarded.class, BIDAdmobRewarded.delegateMethodsToValidate);
+    BOOL bannerDelegatesAreValid = validate(BIDAdmobBanner.class, BIDAdmobBanner.delegateMethodsToValidate);
     
-    return [[GADMobileAds sharedInstance]isSDKVersionAtLeastMajor:10
-                                                            minor:11
-                                                            patch:0] &&
-        ![[GADMobileAds sharedInstance]isSDKVersionAtLeastMajor:10
-                                                          minor:13
-                                                          patch:0];
+    return interstitialDelegatesAreValid && rewardedDelegatesAreValid && bannerDelegatesAreValid;
 }
 
 - (void)enableAdmobing

@@ -2,7 +2,6 @@
 //  TestSDK.h
 //  bidapp
 //
-//  Created by Mikhail Krasnorutskiy on 11/9/23.
 //  Copyright © 2023 bidapp. All rights reserved.
 //
 

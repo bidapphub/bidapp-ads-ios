@@ -10,7 +10,8 @@
 #import "BIDLogger.h"
 
 #import <VungleAdsSDK/VungleAdsSDK.h>
-
+#import "BIDLiftoffInterstitial.h"
+#import "BIDLiftoffRewarded.h"
 #import "BIDNetworkSettings.h"
 #import "BIDLiftoffBanner.h"
 #import "BIDAdFormat.h"
@@ -29,41 +30,20 @@
 	{
 		networkSDK = ntSDK;
 		sdkKey = sdkK;
+        
+        [BIDLiftoffInterstitial setAppId:sdkK publisherId:secondKey];
 	}
 	
 	return self;
 }
 
-+ (BOOL)sdkAvailableWithCompatibleVersion
++ (BOOL)sdkAvailableWithCompatibleVersion:(validate_selectors_t)validate
 {
-	Class NetworkClass = NSClassFromString(@"VungleAdsSDK.VungleAds");
-	BIDLog(self, @"Liftoff Available: %@.",(Nil!=NetworkClass)?@"YES":@"NO");
-	
-	if (Nil!=NetworkClass) {
-		NSString *version = ![NetworkClass respondsToSelector:@selector(sdkVersion)] ? nil : [(id)NetworkClass sdkVersion];
-		NSArray *verComponents = [version componentsSeparatedByString:@"."];
-		if (verComponents.count < 2) {
-			BIDLog(self, @"Liftoff version is NOT compatible: v.%@. Version is Undefined",version);
-			return NO;
-		}
-		else {
-			NSString *major = verComponents[0];
-			NSString *minor = verComponents[1];
-			NSUInteger compatibleMajor = 7;
-			NSUInteger compatibleMinor = 1;
-			if (compatibleMajor == [major integerValue] && compatibleMinor == [minor integerValue])
-			{
-				BIDLog(self, @"Liftoff version is compatible: v.%@",version);
-				return YES;
-			}
-			else
-			{
-				BIDLog(self, @"Liftoff version is NOT compatible: v.%@. Compatable versions are: %ld.%ld.*",version,compatibleMajor,compatibleMinor);
-				return NO;
-			}
-		}
-	}
-	return NO;
+    BOOL interstitialDelegatesAreValid = validate(BIDLiftoffInterstitial.class, BIDLiftoffInterstitial.delegateMethodsToValidate);
+    BOOL rewardedDelegatesAreValid = validate(BIDLiftoffRewarded.class, BIDLiftoffRewarded.delegateMethodsToValidate);
+    BOOL bannerDelegatesAreValid = validate(BIDLiftoffBanner.class, BIDLiftoffBanner.delegateMethodsToValidate);
+    
+    return interstitialDelegatesAreValid && rewardedDelegatesAreValid && bannerDelegatesAreValid;
 }
 
 - (void)initializeSDK
@@ -83,7 +63,7 @@
 				{
 					BIDLog(self,@"SDK NOT initialized. Error: %@",error);
 				}
-				
+                
 				BIDLiftoffSDK* strongSelf = weakSelf;
 				if (strongSelf)
 				{
@@ -94,6 +74,11 @@
 		}];
 	}
 };
+
++(NSString*)getBiddingToken
+{
+    return VungleAds.getBiddingToken;
+}
 
 - (BOOL)isInitialized
 {
