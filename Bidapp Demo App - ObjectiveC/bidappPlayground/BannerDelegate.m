@@ -11,30 +11,29 @@
 
 @implementation BannerDelegate
 
-- (void)adView:(BIDBannerView *)adView readyToRefresh:(BIDAdInfo *)adInfo
+- (void)bannerDidLoad:(BIDBannerView *)banner adInfo:(BIDAdInfo *)adInfo
 {
-	NSLog(@"[%@][%@] readyToRefreshBanner: %d", sessionIdShort(adInfo.showSessionId), adInfo.waterfallId, adInfo.networkId);
-	
-	if (!adView.isAdDisplayed)
-	{
-		[adView refreshAd];
-	}
+    NSLog(@"[%@][%@] bannerDidLoad: %d", sessionIdShort(adInfo.showSessionId), adInfo.waterfallId, adInfo.networkId);
 }
 
-- (void)adView:(BIDBannerView *)adView didDisplayAd:(BIDAdInfo *)adInfo
+- (void)bannerDidDisplay:(BIDBannerView *)banner adInfo:(BIDAdInfo *)adInfo
 {
-	NSLog(@"[%@][%@] didDisplayBanner: %d", sessionIdShort(adInfo.showSessionId), adInfo.waterfallId, adInfo.networkId);
+	NSLog(@"[%@][%@] bannerDidDisplay: %d", sessionIdShort(adInfo.showSessionId), adInfo.waterfallId, adInfo.networkId);
 }
 
-- (void)adView:(BIDBannerView *)adView didFailToDisplayAd:(nonnull BIDAdInfo *)adInfo error:(nonnull NSError *)error
+- (void)bannerDidFailToDisplay:(BIDBannerView *)banner adInfo:(BIDAdInfo *)adInfo error:(NSError *)error
 {
-	NSLog(@"[%@][%@] didFailToDisplayBanner: %d ERROR: %@", sessionIdShort(adInfo.showSessionId), adInfo.waterfallId, adInfo.networkId, error.localizedDescription ? error.localizedDescription : error);
+	NSLog(@"[%@][%@] bannerDidFailToDisplay: %d ERROR: %@", sessionIdShort(adInfo.showSessionId), adInfo.waterfallId, adInfo.networkId, error.localizedDescription ? error.localizedDescription : error);
 }
 
-- (void)adView:(BIDBannerView *)adView didClicked:(BIDAdInfo *)adInfo
+- (void)bannerDidClick:(BIDBannerView *)banner adInfo:(BIDAdInfo *)adInfo
 {
 	NSLog(@"[%@][%@] bannerDidClicked: %d", sessionIdShort(adInfo.showSessionId), adInfo.waterfallId, adInfo.networkId);
 }
 
+- (void)allNetworksFailedToDisplayAdInBanner:(BIDBannerView *)banner
+{
+    NSLog(@"allNetworksFailedToDisplayAdInBanner");
+}
 
 @end

@@ -18,10 +18,6 @@
 	[bidConfig enableTestMode];
 	[bidConfig enableLogging];
 	
-	[bidConfig enableInterstitialAds];
-	[bidConfig enableRewardedAds];
-	[bidConfig enableBannerAds];
-	
 	NSString *pubid = @"15ddd248-7acc-46ce-a6fd-e6f6543d22cd";
 	if (@available(iOS 14, *)) {
 		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
