@@ -13,7 +13,6 @@
 #import "BIDNetworkFullscreen.h"
 #import "BIDAdFormat.h"
 #import "BIDNetworkSDK.h"
-#import "NSError+Categories.h"
 #import <WebKit/WebKit.h>
 #import <objc/runtime.h>
 
@@ -161,7 +160,7 @@
 
 #pragma mark - Load ad
 
--(void)load
+-(void)loadWithBid:(id<BidappBid>)bid
 {
 	BIDLog(self, @"_load %@", _placementId);
 	
@@ -214,8 +213,6 @@
     NSError* e = [NSError errorWithDomain:@"io.bidapp" code:(923745+(int)error) userInfo:@{NSLocalizedDescriptionKey : [NSString stringWithFormat:@"%@%@", prefix, message]}];
     
     [networkFullscreen onAdFailedToLoadWithError:e];
-    
-	[networkFullscreen onAdFailedToLoadWithError:[NSError errorWithNetworkId:UNITY_ADAPTER_UID code:error description:message]];
 }
 
 #pragma mark - Display ad
@@ -243,6 +240,18 @@
     [UnityAds show:vc placementId:_placementId showDelegate:self];
     
     return YES;
+}
+
++(NSPointerArray*)delegateMethodsToValidate
+{
+    NSPointerArray *selectors = [[NSPointerArray alloc] initWithOptions: NSPointerFunctionsOpaqueMemory];
+    
+    [selectors addPointer:@selector(unityAdsShowStart:)];
+    [selectors addPointer:@selector(unityAdsShowFailed:withError:withMessage:)];
+    [selectors addPointer:@selector(unityAdsShowClick:)];
+    [selectors addPointer:@selector(unityAdsShowComplete:withFinishState:)];
+    
+    return selectors;
 }
 
 #pragma mark - UnityAdsShowDelegate

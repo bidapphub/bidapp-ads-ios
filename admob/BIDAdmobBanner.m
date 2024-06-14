@@ -11,7 +11,6 @@
 #import "BIDNetworkBanner.h"
 #import "BIDAdFormat.h"
 #import "BIDNetworkSettings.h"
-#import "NSError+Categories.h"
 
 #import <GoogleMobileAds/GoogleMobileAds.h>
 
@@ -39,14 +38,26 @@
 								  format:(id<BIDAdFormat>)format
 								 ownerId:(NSString * __nullable)ownerId
 {
-    if (!format.isBanner_320x50 &&
-        !format.isBanner_300x250)
+    GADAdSize bannerSize;
+    if (format.isBanner_320x50)
+    {
+        bannerSize = GADAdSizeBanner;
+    }
+    else if (format.isBanner_300x250)
+    {
+        bannerSize = GADAdSizeMediumRectangle;
+    }
+    else if (format.isBanner_728x90)
+    {
+        bannerSize =  GADAdSizeLeaderboard;
+    }
+    else
     {
         BIDLog(self, @"ERROR - Unsuported banner format: %@", format);
         return nil;
     }
     
-    GADBannerView *adView = [(GADBannerView*)[GADBannerView alloc] initWithAdSize:format.isBanner_320x50 ? GADAdSizeBanner : GADAdSizeMediumRectangle];
+    GADBannerView *adView = [(GADBannerView*)[GADBannerView alloc] initWithAdSize:bannerSize];
     if (nil==adView) {
         return nil;
     }
@@ -128,7 +139,7 @@
 	return ready;
 }
 
-- (void)load
+- (void)loadWithBid:(id<BidappBid>)bid
 {
     GADRequest* request = [GADRequest request];
     
@@ -150,6 +161,17 @@
     [view insertSubview:adView atIndex:0];
     
     return YES;
+}
+
++(NSPointerArray*)delegateMethodsToValidate
+{
+    NSPointerArray *selectors = [[NSPointerArray alloc] initWithOptions: NSPointerFunctionsOpaqueMemory];
+    
+    [selectors addPointer:@selector(bannerViewDidReceiveAd:)];
+    [selectors addPointer:@selector(bannerView:didFailToReceiveAdWithError:)];
+    [selectors addPointer:@selector(bannerViewDidRecordClick:)];
+    
+    return selectors;
 }
 
 #pragma mark - GADBannerViewDelegate

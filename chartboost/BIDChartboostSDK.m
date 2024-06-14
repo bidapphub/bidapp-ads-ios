@@ -9,10 +9,12 @@
 #import "BIDChartboostSDK.h"
 #import "BIDLogger.h"
 
+#import "BIDChartboostInterstitial.h"
+#import "BIDChartboostRewarded.h"
+#import "BIDChartboostBanner.h"
 #import "BIDNetworkSettings.h"
 #import "BIDTestBanner.h"
 #import "BIDAdFormat.h"
-#import "NSError+Categories.h"
 
 #import "TestSDK.h"
 
@@ -78,40 +80,13 @@
     return self.initialized;
 }
 
-+ (BOOL)sdkAvailableWithCompatibleVersion
++ (BOOL)sdkAvailableWithCompatibleVersion:(validate_selectors_t)validate
 {
-    if (![Chartboost respondsToSelector:@selector(getSDKVersion)])
-    {
-        return NO;
-    }
+    BOOL interstitialDelegatesAreValid = validate(BIDChartboostInterstitial.class, BIDChartboostInterstitial.delegateMethodsToValidate);
+    BOOL rewardedDelegatesAreValid = validate(BIDChartboostRewarded.class,BIDChartboostRewarded.delegateMethodsToValidate);
+    BOOL bannerDelegatesAreValid = validate(BIDChartboostBanner.class, BIDChartboostBanner.delegateMethodsToValidate);
     
-    int componentIndex = 0;
-    for (NSString* v in [[Chartboost getSDKVersion]componentsSeparatedByString:@"."])
-    {
-        int versionComponent = v.intValue;
-        if (componentIndex == 0)
-        {
-            if (versionComponent != 9)
-            {
-                return NO;
-            }
-        }
-        else if (componentIndex == 1)
-        {
-            if (versionComponent != 5)
-            {
-                return NO;
-            }
-        }
-        else
-        {
-            break;
-        }
-        
-        ++componentIndex;
-    }
-
-    return YES;
+    return interstitialDelegatesAreValid && rewardedDelegatesAreValid && bannerDelegatesAreValid;
 }
 
 - (void)enableTesting

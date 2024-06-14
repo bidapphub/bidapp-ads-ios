@@ -14,7 +14,6 @@
 #import "BIDAdFormat.h"
 #import "BIDNetworkSDK.h"
 #import "TestFullscreen.h"
-#import "NSError+Categories.h"
 
 @interface BIDTestFullscreen()<TestAdLoadDelegate,TestAdShowDelegate>
 {
@@ -49,7 +48,7 @@
 
 #pragma mark - Load ad
 
--(void)load
+-(void)loadWithBid:(id<BidappBid>)bid
 {
 	BIDLog(self, @"_load %@", _placementId);
     

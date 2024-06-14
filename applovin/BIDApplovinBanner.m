@@ -13,7 +13,6 @@
 
 #import "BIDAdFormat.h"
 #import "BIDNetworkSettings.h"
-#import "NSError+Categories.h"
 #import "NSError+AppLovin.h"
 
 @interface BIDApplovinBanner () <ALAdLoadDelegate,ALAdDisplayDelegate>
@@ -50,6 +49,10 @@
 	{
 		alsize = [ALAdSize mrec];
 	}
+    else if (format.isBanner_728x90)
+    {
+        alsize = [ALAdSize leader];
+    }
 	else
 	{
 		BIDLog(self, @"ERROR - Unsuported applovin banner format: %@", format);
@@ -104,7 +107,7 @@
 	return nil != self.cachedAd;
 }
 
-- (void)load
+- (void)loadWithBid:(id<BidappBid>)bid
 {
 	[adView loadNextAd];
 }
@@ -131,6 +134,19 @@
 	[view insertSubview:adView atIndex:0];
 	
 	return YES;
+}
+
++(NSPointerArray*)delegateMethodsToValidate
+{
+    NSPointerArray *selectors = [[NSPointerArray alloc] initWithOptions: NSPointerFunctionsOpaqueMemory];
+
+    [selectors addPointer:@selector(adService:didLoadAd:)];
+    [selectors addPointer:@selector(adService:didFailToLoadAdWithError:)];
+    [selectors addPointer:@selector(ad:wasDisplayedIn:)];
+    [selectors addPointer:@selector(ad:wasClickedIn:)];
+    [selectors addPointer:@selector(ad:wasHiddenIn:)];
+    
+    return selectors;
 }
 
 #pragma mark - ALAdDisplayDelegate

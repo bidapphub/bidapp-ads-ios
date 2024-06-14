@@ -61,7 +61,7 @@
 
 #pragma mark - Load ad
 
--(void)load
+-(void)loadWithBid:(id<BidappBid>)bid
 {
 	[_sdk.adService loadNextAd:[ALAdSize interstitial] andNotify:self];
 }
@@ -98,6 +98,19 @@
 	[_interstitialAd showAd:_ad];
     
     return YES;
+}
+
++(NSPointerArray*)delegateMethodsToValidate
+{
+    NSPointerArray *selectors = [[NSPointerArray alloc] initWithOptions: NSPointerFunctionsOpaqueMemory];
+
+    [selectors addPointer:@selector(adService:didLoadAd:)];
+    [selectors addPointer:@selector(adService:didFailToLoadAdWithError:)];
+    [selectors addPointer:@selector(ad:wasDisplayedIn:)];
+    [selectors addPointer:@selector(ad:wasClickedIn:)];
+    [selectors addPointer:@selector(ad:wasHiddenIn:)];
+    
+    return selectors;
 }
 
 #pragma mark - ALAdDisplayDelegate protocol

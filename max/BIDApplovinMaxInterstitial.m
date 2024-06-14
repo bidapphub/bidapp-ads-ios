@@ -13,7 +13,6 @@
 #import "BIDNetworkFullscreen.h"
 #import "BIDAdFormat.h"
 #import "BIDNetworkSDK.h"
-#import "NSError+Categories.h"
 
 #import <AppLovinSDK/AppLovinSDK.h>
 
@@ -63,7 +62,7 @@
 
 #pragma mark - Load ad
 
-- (void)load
+- (void)loadWithBid:(id<BidappBid>)bid
 {
 	[_interstitialAd loadAd];
 }
@@ -77,9 +76,13 @@
 	[adapter onAdLoaded];
 }
 
-- (void)didFailToLoadAdForAdUnitIdentifier:(NSString *)adUnitIdentifier withError:(MAError *)error
+- (void)didFailToLoadAdForAdUnitIdentifier:(NSString *)adUnitIdentifier withError:(MAError *)e
 {
-	[adapter onAdFailedToLoadWithError:[NSError errorWithNetworkId:APPLOVIN_MAX_ADAPTER_UID code:error.code description:error.message]];
+    NSString* description = e.message ? e.message : @"Unknown error";
+    NSError* error = [NSError errorWithDomain:@"io.bidapp.applovin-max"
+                                         code:e.code
+                                     userInfo:@{NSLocalizedDescriptionKey : description}];
+	[adapter onAdFailedToLoadWithError:error];
 }
 
 #pragma mark - Display ad
@@ -102,6 +105,20 @@
     return YES;
 }
 
++(NSPointerArray*)delegateMethodsToValidate
+{
+    NSPointerArray *selectors = [[NSPointerArray alloc] initWithOptions: NSPointerFunctionsOpaqueMemory];
+    
+    [selectors addPointer:@selector(didLoadAd:)];
+    [selectors addPointer:@selector(didFailToLoadAdForAdUnitIdentifier:withError:)];
+    [selectors addPointer:@selector(didDisplayAd:)];
+    [selectors addPointer:@selector(didFailToDisplayAd:withError:)];
+    [selectors addPointer:@selector(didClickAd:)];
+    [selectors addPointer:@selector(didHideAd:)];
+    
+    return selectors;
+}
+
 #pragma mark - MAAdDelegate - display ad
 
 - (void)didDisplayAd:(MAAd *)ad
@@ -109,9 +126,13 @@
 	[adapter onDisplay];
 }
 
-- (void)didFailToDisplayAd:(MAAd *)ad withError:(MAError *)error
+- (void)didFailToDisplayAd:(MAAd *)ad withError:(MAError *)e
 {
-	[adapter onFailedToDisplay:[NSError errorWithNetworkId:APPLOVIN_MAX_ADAPTER_UID code:error.code description:error.message]];
+    NSString* description = e.message ? e.message : @"Unknown error";
+    NSError* error = [NSError errorWithDomain:@"io.bidapp.applovin-max"
+                                         code:e.code
+                                     userInfo:@{NSLocalizedDescriptionKey : description}];
+	[adapter onFailedToDisplay:error];
 }
 
 - (void)didClickAd:(MAAd *)ad

@@ -21,10 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         bidConfig.enableTestMode()
         bidConfig.enableLogging()
         
-        bidConfig.enableInterstitialAds()
-        bidConfig.enableRewardedAds()
-        bidConfig.enableBannerAds()
-        
         let pubid = "15ddd248-7acc-46ce-a6fd-e6f6543d22cd"
         if #available(iOS 14, *) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

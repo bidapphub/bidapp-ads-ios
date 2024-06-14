@@ -10,5 +10,7 @@
 
 @interface BIDLiftoffInterstitial : NSObject<BIDFullscreenAdapter>
 
++(void)setAppId:(NSString*)appId publisherId:(NSString*)publisherId;
+
 @end
 

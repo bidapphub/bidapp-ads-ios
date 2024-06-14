@@ -14,6 +14,11 @@
 - (void)bannerDidLoad:(BIDBannerView *)banner adInfo:(BIDAdInfo *)adInfo
 {
     NSLog(@"[%@][%@] bannerDidLoad: %d", sessionIdShort(adInfo.showSessionId), adInfo.waterfallId, adInfo.networkId);
+    
+    if (!banner.isAdDisplayed)
+    {
+        [banner refreshAd];
+    }
 }
 
 - (void)bannerDidDisplay:(BIDBannerView *)banner adInfo:(BIDAdInfo *)adInfo

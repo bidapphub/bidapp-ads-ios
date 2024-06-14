@@ -14,7 +14,6 @@
 #import "BIDAdFormat.h"
 #import "BIDNetworkSDK.h"
 #import "TestFullscreen.h"
-#import "NSError+Categories.h"
 
 #import <ChartboostSDK/ChartboostSDK.h>
 
@@ -48,7 +47,7 @@
 
 #pragma mark - Load ad
 
--(void)load
+-(void)loadWithBid:(id<BidappBid>)bid
 {
     BIDLog(self, @"_load %@", _location);
     
@@ -81,6 +80,21 @@
 {
     return YES;
 }
+
++(NSPointerArray*)delegateMethodsToValidate
+{
+    NSPointerArray *selectors = [[NSPointerArray alloc] initWithOptions: NSPointerFunctionsOpaqueMemory];
+    
+    [selectors addPointer:@selector(didCacheAd:error:)];
+    [selectors addPointer:@selector(didShowAd:error:)];
+    [selectors addPointer:@selector(didDismissAd:)];
+    [selectors addPointer:@selector(didClickAd:error:)];
+    [selectors addPointer:@selector(didEarnReward:)];
+    
+    return selectors;
+}
+
+#pragma mark - CHBAdDelegate
 
 -(void)didCacheAd:(CHBCacheEvent *)event error:(CHBCacheError *)error
 {

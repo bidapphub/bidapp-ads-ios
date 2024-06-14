@@ -10,23 +10,27 @@ import bidapp
 
 class BannerDelegate : NSObject, BIDBannerViewDelegate {
     
-    func adView(_ adView: BIDBannerView, readyToRefresh adInfo: BIDAdInfo) {
-        print("[\(String(describing: adInfo.showSessionId))][\(String(describing: adInfo.waterfallId))] readyToRefreshBanner: \(adInfo.networkId) [\(adInfo)]")
+    func bannerDidLoad(_ banner: BIDBannerView, adInfo: BIDAdInfo) {
+        print("[\(String(describing: adInfo.showSessionId))][\(String(describing: adInfo.waterfallId))] bannerDidLoad: \(adInfo.networkId) [\(adInfo)]")
         
-        if !adView.isAdDisplayed() {
-            adView.refreshAd()
+        if !banner.isAdDisplayed() {
+            banner.refreshAd()
         }
     }
     
-    func adView(_ adView: BIDBannerView, didDisplayAd adInfo: BIDAdInfo) {
-        print("[\(String(describing: adInfo.showSessionId))][\(String(describing: adInfo.waterfallId))] didDisplayBanner: \(adInfo.networkId) [\(adInfo)]")
+    func bannerDidDisplay(_ banner: BIDBannerView, adInfo: BIDAdInfo) {
+        print("[\(String(describing: adInfo.showSessionId))][\(String(describing: adInfo.waterfallId))] bannerDidDisplay: \(adInfo.networkId) [\(adInfo)]")
     }
     
-    func adView(_ adView: BIDBannerView, didFailToDisplayAd adInfo: BIDAdInfo, error: Error) {
-        print("[\(String(describing: adInfo.showSessionId))][\(String(describing: adInfo.waterfallId))] didFailToDisplayBanner: \(adInfo.networkId) [\(adInfo)] ERROR: \(error.localizedDescription)")
+    func bannerDidFail(toDisplay banner: BIDBannerView, adInfo: BIDAdInfo, error: Error) {
+        print("[\(String(describing: adInfo.showSessionId))][\(String(describing: adInfo.waterfallId))] bannerDidFailToDisplay: \(adInfo.networkId) [\(adInfo)] ERROR: \(error.localizedDescription)")
     }
     
-    func adView(_ adView: BIDBannerView, didClicked adInfo: BIDAdInfo) {
-        print("[\(String(describing: adInfo.showSessionId))][\(String(describing: adInfo.waterfallId))] bannerDidClicked: \(adInfo.networkId) [\(adInfo)]")
+    func bannerDidClick(_ banner: BIDBannerView, adInfo: BIDAdInfo) {
+        print("[\(String(describing: adInfo.showSessionId))][\(String(describing: adInfo.waterfallId))] bannerDidClick: \(adInfo.networkId) [\(adInfo)]")
+    }
+    
+    func allNetworksFailedToDisplayAd(inBanner banner: BIDBannerView) {
+        print("allNetworksFailedToDisplayAd")
     }
 }

@@ -10,7 +10,6 @@
 #import "BIDNetworkBanner.h"
 #import "BIDAdFormat.h"
 #import "BIDNetworkSettings.h"
-#import "NSError+Categories.h"
 
 #import <ChartboostSDK/ChartboostSDK.h>
 
@@ -37,13 +36,27 @@
 								  format:(id<BIDAdFormat>)format
 								 ownerId:(NSString * __nullable)ownerId
 {
-    if (!format.isBanner_320x50 &&
-        !format.isBanner_300x250)
+#if DEBUG
+    assert(sizeof(CGSize) == sizeof(CHBBannerSize));
+#endif
+    CGSize chbSize;
+    if (format.isBanner_320x50)
+    {
+        chbSize = CHBBannerSizeStandard;
+    }
+    else if (format.isBanner_300x250)
+    {
+        chbSize = CHBBannerSizeMedium;
+    }
+    else if (format.isBanner_728x90)
+    {
+        chbSize = CHBBannerSizeLeaderboard;
+    }
+    else
     {
         BIDLog(self, @"ERROR - Unsuported applovin banner format: %@", format);
         return nil;
     }
-    CHBBannerSize chbSize = format.isBanner_320x50 ? CHBBannerSizeStandard : CHBBannerSizeMedium;
 
 	BIDChartboostBanner *banner = [[BIDChartboostBanner alloc] init];
 	if (banner)
@@ -92,7 +105,7 @@
     return adView.isCached;
 }
 
-- (void)load
+- (void)loadWithBid:(id<BidappBid>)bid
 {
     [adView cache];
 }
@@ -156,7 +169,9 @@
 {
     if (!self.isAdReady)
     {
-        *error = [NSError error_notReady];
+        *error = [NSError errorWithDomain:@"io.bidapp"
+                                     code:9376343
+                             userInfo:@{NSLocalizedDescriptionKey:@"ERROR Ad not ready"}];
         return NO;
     }
     
@@ -167,6 +182,19 @@
     
     return YES;
 }
+
++(NSPointerArray*)delegateMethodsToValidate
+{
+    NSPointerArray *selectors = [[NSPointerArray alloc] initWithOptions: NSPointerFunctionsOpaqueMemory];
+    
+    [selectors addPointer:@selector(didCacheAd:error:)];
+    [selectors addPointer:@selector(didShowAd:error:)];
+    [selectors addPointer:@selector(didClickAd:error:)];
+    
+    return selectors;
+}
+
+#pragma mark - CHBAdDelegate
 
 - (void)didShowAd:(CHBShowEvent *)event error:(nullable CHBShowError *)error;
 {

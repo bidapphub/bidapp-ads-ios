@@ -13,7 +13,6 @@
 
 #import "BIDAdFormat.h"
 #import "BIDNetworkSettings.h"
-#import "NSError+Categories.h"
 
 //If you display banner during caching - the app will crash
 //#define DISPLAY_DURING_CACHING
@@ -56,6 +55,10 @@
 	{
 		lfsize = BannerSizeMrec;
 	}
+    else if (format.isBanner_728x90)
+    {
+        lfsize = BannerSizeLeaderboard;
+    }
 	else
 	{
 		BIDLog(self, @"ERROR - Unsuported liftoff banner format: %@", format);
@@ -110,7 +113,7 @@
 #endif
 }
 
-- (void)load
+- (void)loadWithBid:(id)bid
 {
 	[self.ad load:nil];
 }
@@ -168,13 +171,17 @@
 {
     if (!self.isAdReady)
     {
-        *error = [NSError error_notReady];
+        *error = [NSError errorWithDomain:@"io.bidapp"
+                                     code:9376343
+                             userInfo:@{NSLocalizedDescriptionKey:@"ERROR Ad not ready"}];
         return NO;
     }
     
     if (!view.window)
     {
-        *error = [NSError error_notOnWindow];
+        *error = [NSError errorWithDomain:@"io.bidapp"
+                                     code:1320
+                             userInfo:@{NSLocalizedDescriptionKey: @"FAILED to display ad. Target view is not on the view hierarchy (window property is nil)."}];
         return NO;
     }
 	
@@ -184,6 +191,19 @@
     [self.cachedAd presentOn:adView];
     
     return YES;
+}
+
++(NSPointerArray*)delegateMethodsToValidate
+{
+    NSPointerArray *selectors = [[NSPointerArray alloc] initWithOptions: NSPointerFunctionsOpaqueMemory];
+    
+    [selectors addPointer:@selector(bannerAdDidLoad:)];
+    [selectors addPointer:@selector(bannerAdDidFailToLoad:withError:)];
+    [selectors addPointer:@selector(bannerAdDidPresent:)];
+    [selectors addPointer:@selector(bannerAdDidFailToPresent:withError:)];
+    [selectors addPointer:@selector(bannerAdDidClick:)];
+    
+    return selectors;
 }
 
 - (void)bannerAdDidLoad:(VungleBanner * _Nonnull)banner

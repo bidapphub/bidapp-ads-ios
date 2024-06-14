@@ -10,11 +10,12 @@
 #import "BIDLogger.h"
 
 #import <UnityAds/UnityAds.h>
+#import "BIDUnityFullscreen.h"
+#import "BIDUnityBanner.h"
 
 #import "BIDNetworkSettings.h"
 #import "BIDUnityBanner.h"
 #import "BIDAdFormat.h"
-#import "NSError+Categories.h"
 
 @interface BIDUnitySDK ()<UnityAdsInitializationDelegate>
 {
@@ -49,6 +50,16 @@
 		[UnityAds initialize:sdkKey testMode:testMode initializationDelegate:self];
 	}
 };
+
++(NSPointerArray*)delegateMethodsToValidate
+{
+    NSPointerArray *selectors = [[NSPointerArray alloc] initWithOptions: NSPointerFunctionsOpaqueMemory];
+
+    [selectors addPointer:@selector(initializationComplete)];
+    [selectors addPointer:@selector(initializationFailed:withMessage:)];
+    
+    return selectors;
+}
 
 #pragma mark - UnityAdsInitializationDelegate protocol
 
@@ -92,37 +103,13 @@
 	return [UnityAds isInitialized];
 }
 
-+ (BOOL)sdkAvailableWithCompatibleVersion
++ (BOOL)sdkAvailableWithCompatibleVersion:(validate_selectors_t)validate
 {
-	Class NetworkClass = NSClassFromString(@"UnityAds");
-	BIDLog(self, @"UnityAds Available: %@.",(Nil!=NetworkClass)?@"YES":@"NO");
-	
-	if (Nil!=NetworkClass) {
-		NSString *version = [NetworkClass getVersion];
-		NSArray *verComponents = [version componentsSeparatedByString:@"."];
-		if (verComponents.count < 2) {
-			BIDLog(self, @"UnityAds version is NOT compatible: v.%@. Version is Undefined",version);
-			return NO;
-		}
-		else {
-			NSString *major = verComponents[0];
-			NSString *minor = verComponents[1];
-			NSUInteger compatibleMajor = 4;
-			NSUInteger compatibleMinor_max = 9;
-			NSUInteger compatibleMinor_min = 6;
-			if (compatibleMajor == [major integerValue] && compatibleMinor_min <= [minor integerValue] && compatibleMinor_max >= [minor integerValue])
-			{
-				BIDLog(self, @"UnityAds version is compatible: v.%@",version);
-				return YES;
-			}
-			else
-			{
-				BIDLog(self, @"UnityAds version is NOT compatible: v.%@. Compatable versions are: %ld.%ld.* - %ld.%ld.*",version,compatibleMajor,compatibleMinor_min,compatibleMajor,compatibleMinor_max);
-				return NO;
-			}
-		}
-	}
-	return NO;
+    BOOL sdkDelegatesAreValid = validate(BIDUnitySDK.class, BIDUnitySDK.delegateMethodsToValidate);
+    BOOL fullscreenDelegatesAreValid = validate(BIDUnityFullscreen.class, BIDUnityFullscreen.delegateMethodsToValidate);
+    BOOL bannerDelegatesAreValid = validate(BIDUnityBanner.class, BIDUnityBanner.delegateMethodsToValidate);
+    
+    return sdkDelegatesAreValid && fullscreenDelegatesAreValid && bannerDelegatesAreValid;
 }
 
 - (void)enableTesting

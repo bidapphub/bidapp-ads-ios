@@ -13,7 +13,6 @@
 
 #import "BIDAdFormat.h"
 #import "BIDNetworkSettings.h"
-#import "NSError+Categories.h"
 
 @interface BIDApplovinMaxBanner () <MAAdViewAdDelegate>
 {
@@ -49,6 +48,10 @@
 	{
 		adFormat = MAAdFormat.mrec;
 	}
+    else if (format.isBanner_728x90)
+    {
+        adFormat = MAAdFormat.leader;
+    }
 	else
 	{
 		BIDLog(self, @"ERROR - Unsuported applovin MAX banner format: %@", format);
@@ -105,7 +108,7 @@
 	return nil != self.cachedAd;
 }
 
-- (void)load
+- (void)loadWithBid:(id<BidappBid>)bid
 {
 	[adView loadAd];
 }
@@ -136,6 +139,22 @@
 	[view insertSubview:adView atIndex:0];
 	
 	return YES;
+}
+
++(NSPointerArray*)delegateMethodsToValidate
+{
+    NSPointerArray *selectors = [[NSPointerArray alloc] initWithOptions: NSPointerFunctionsOpaqueMemory];
+
+    [selectors addPointer:@selector(didLoadAd:)];
+    [selectors addPointer:@selector(didFailToLoadAdForAdUnitIdentifier:withError:)];
+    [selectors addPointer:@selector(didDisplayAd:)];
+    [selectors addPointer:@selector(didFailToDisplayAd:withError:)];
+    [selectors addPointer:@selector(didClickAd:)];
+    [selectors addPointer:@selector(didHideAd:)];
+    [selectors addPointer:@selector(didExpandAd:)];
+    [selectors addPointer:@selector(didCollapseAd:)];
+    
+    return selectors;
 }
 
 #pragma mark - ALAdDisplayDelegate
